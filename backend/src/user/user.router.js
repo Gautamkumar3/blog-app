@@ -36,7 +36,7 @@ app.post("/refresh", async (req, res) => {
                 if (er) {
                     return res.status(406).send("User not authorized")
                 } else {
-                    const maintoken = jwt.sign({ id: data.id, email: data.email, name: data.name, role: data.role }, secretKey, { expiresIn: "1 hour" })
+                    const maintoken = jwt.sign({ id: data.id, email: data.email, name: data.name, role: data.role }, secretKey, { expiresIn: "1 day" })
                     return res.status(200).send({ token: maintoken })
                 }
             });
@@ -54,7 +54,7 @@ app.post("/login", async (req, res) => {
     if (!user) {
         return res.status(404).send("Invalid Credentials")
     }
-    const token = jwt.sign({ id: user._id, email: user.email, name: user.name, role: user.role }, secretKey, { expiresIn: "1 hour" })
+    const token = jwt.sign({ id: user._id, email: user.email, name: user.name, role: user.role }, secretKey, { expiresIn: "1 day" })
 
     const refreshToken = jwt.sign({ id: user._id, email: user.email, name: user.name, role: user.role }, refreshKey, { expiresIn: "7 days" })
 
