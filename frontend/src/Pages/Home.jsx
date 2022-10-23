@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios"
-import { Box, Button, Flex, FormControl, FormLabel, Image, Input, Text, Textarea, useToast } from '@chakra-ui/react';
+import { Box, Button, Flex, FormControl, FormLabel, Heading, Image, Input, Text, Textarea, useToast } from '@chakra-ui/react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import Styles from "./Home.module.css"
 
 const Home = () => {
     const token = JSON.parse(localStorage.getItem("token")).token || "";
@@ -75,11 +76,9 @@ const Home = () => {
 
     const handleChange = (e) => {
         postDetails(e.target.files[0])
-        const { name, value, type, files } = e.target;
+        const { name, value, type } = e.target;
         const updatedValue = type === "file" ? imageUrl : value
         setFormdata({ ...formData, [name]: updatedValue })
-
-        console.log(imageUrl)
     }
 
 
@@ -105,7 +104,26 @@ const Home = () => {
     }
 
     return (
-        <div>
+        <Box pos="relative">
+            <Box textAlign="center" position="absolute" top="5%" left="50%" transform= "translate(-50%, -50%)">
+                <Heading color="white" size={["xl"]} >Welcome to Gk blog</Heading>
+            </Box>
+            <Box >
+                <Image height="400vh" w="100%" src="https://static.wixstatic.com/media/fee50a_8d5c6f21a5d14b919d4be75bd07b5337~mv2_d_3840_12495_s_3_2.jpg/v1/fill/w_1898,h_8653,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/fee50a_8d5c6f21a5d14b919d4be75bd07b5337~mv2_d_3840_12495_s_3_2.jpg" />
+            </Box>
+
+        </Box>
+    )
+}
+
+export default Home;
+
+
+
+
+
+
+{/* <div className={Styles.Main}>
             {
                 data?.map((el, id) =>
                     <Flex key={id}>
@@ -118,7 +136,7 @@ const Home = () => {
             }
 
             <div>
-                <Flex bg="gray.100" justify="center" >
+                <Flex justify="center" >
                     <Box bg="white" px={5} rounded="md" w="30%" mt={"5%"} height="fit-content" boxShadow='xl'>
 
                         <Box textAlign={"left"} p="25px 5px" >
@@ -136,8 +154,4 @@ const Home = () => {
                     </Box>
                 </Flex>
             </div>
-        </div>
-    )
-}
-
-export default Home
+        </div> */}

@@ -7,8 +7,8 @@ import Allroute from './route/Allroute';
 function App() {
   return (
     <div className="App">
-      {/* <Navbar />
-      <Allroute /> */}
+      <Navbar />
+      <Allroute />
       <BlogCard />
     </div>
   );

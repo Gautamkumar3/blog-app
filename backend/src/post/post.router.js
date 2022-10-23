@@ -16,7 +16,7 @@ const fs = require('fs');
 app.get("/all", async (req, res) => {
     try {
         const allPost = await Post.find();
-        return res.status(200).send(allPost).populate("userId")
+        return res.status(200).send(allPost)
     } catch (er) {
         return res.status(404).send("Something went wrong")
     }
