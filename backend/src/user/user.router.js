@@ -22,7 +22,7 @@ app.post("/signup", async (req, res) => {
         }
         let newUser = new UserModel({ name, email, password, role })
         await newUser.save();
-        res.status(200).send("user created successflly")
+        return res.status(200).send(newUser)
     } catch (er) {
         return res.status(500).send(er.message)
     }
@@ -41,7 +41,7 @@ app.post("/refresh", async (req, res) => {
                 }
             });
         } catch (er) {
-            return res.status(403).send({msg : er.message})
+            return res.status(403).send({ msg: er.message })
         }
     } else {
         return res.status(406).send("User not authorized")
@@ -58,7 +58,7 @@ app.post("/login", async (req, res) => {
 
     const refreshToken = jwt.sign({ id: user._id, email: user.email, name: user.name, role: user.role }, refreshKey, { expiresIn: "7 days" })
 
-    res.status(200).send({ msg: "Login success fully created", token: token, rtoken: refreshToken })
+    res.status(200).send({ msg: "Login successfull", token: token, rtoken: refreshToken, name: user.name })
 })
 
 

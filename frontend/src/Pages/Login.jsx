@@ -19,11 +19,14 @@ import {
 import { Link } from 'react-router-dom';
 import { BiHide, BiShow } from "react-icons/bi"
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { UserLogin } from '../store/auth/Auth.action';
 
 const Login = () => {
 
     const [data, setData] = useState({ email: "", password: "" });
-
+    const dispatch = useDispatch();
+    
 
     const [show, setShow] = useState(false)
     const handleClick = () => setShow(!show)
@@ -33,14 +36,11 @@ const Login = () => {
         setData({ ...data, [name]: value })
     }
 
+
+
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post("http://localhost:8080/users/login", data).then((res) => {
-            console.log(res.data)
-            localStorage.setItem("token", JSON.stringify(res.data))
-            alert("Done")
-        })
-
+        dispatch(UserLogin(data))
     }
 
 

@@ -4,5 +4,7 @@ export const AUTH_LOGIN_ERROR = 'auth/login/error'
 
 
 export const AUTH_SIGNUP_SUCCESS = 'auth/signup/success'
-export const AUTH_SIGNUP_LOADING = '<auth /signup/loading'
+export const AUTH_SIGNUP_LOADING = 'auth/signup/loading'
 export const AUTH_SIGNUP_ERROR = 'auth/signup/error'
+
+export const LOGOUT_SUCCESS = "logout/success"

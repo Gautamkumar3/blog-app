@@ -145,35 +145,4 @@ export default Home;
 
 
 
-{/* <div className={Styles.Main}>
-            {
-                data?.map((el, id) =>
-                    <Flex key={id}>
-                        <Text p={10} bg="red" m={2}>{el.title}</Text>
-                        <Button onClick={() => handleDelete(el._id, el.userId)}>Delete</Button>
-                        <NavLink to={`/post/${el._id}`}>Read More </NavLink>
-                        <Image h={"100px"} src={el.image} />
-                    </Flex>
-                )
-            }
 
-            <div>
-                <Flex justify="center" >
-                    <Box bg="white" px={5} rounded="md" w="30%" mt={"5%"} height="fit-content" boxShadow='xl'>
-
-                        <Box textAlign={"left"} p="25px 5px" >
-                            <form onSubmit={handleSubmit} >
-                                <FormControl isRequired>
-                                    <FormLabel>Blog Title</FormLabel>
-                                    <Input placeholder='blog title' name="title" onChange={handleChange} />
-                                    <FormLabel mt={5}>Blog Content</FormLabel>
-                                    <Textarea minH="200px" mb={5} placeholder='Type your content here' name='content' onChange={handleChange} />
-                                    <input type="file" name="image" onChange={handleChange} />
-                                    <Input mt={5} type="submit" value="Create Post" color={"white"} bg="tomato" w="full" />
-                                </FormControl>
-                            </form>
-                        </Box>
-                    </Box>
-                </Flex>
-            </div>
-        </div> */}

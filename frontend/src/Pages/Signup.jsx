@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Formik, Field } from "formik";
+import { useDispatch } from 'react-redux'
 import axios from "axios"
 import {
     Box,
@@ -8,29 +8,28 @@ import {
     Input,
     Image
 } from "@chakra-ui/react";
+import { UserSignup } from '../store/auth/Auth.action';
 
 const Signup = () => {
 
-    const [formData, setFormdata] = useState({ name: "", email: "", password: "" })
+    const [formData, setFormdata] = useState({ name: "", email: "", password: "" });
+    const dispatch = useDispatch()
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormdata({ ...formData, [name]: value })
     }
 
+
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post("http://localhost:8080/users/signup", formData).then((res) => {
-            console.log(res.data)
-            alert("Done")
-        })
-        console.log(formData)
+        dispatch(UserSignup(formData))
     }
 
     return (
         <div>
-            <Flex bg="gray.100" justify="center" h="100vh" >
-                <Box bg="white" px={5} rounded="md" w="30%" mt={"5%"} height="fit-content">
+            <Flex bg="gray.100" justify="center" >
+                <Box bg="white" px={5} rounded="md" w={["90%", "30%"]} mt={"5%"} height="fit-content">
                     <Box >
                         <Image w={"200px"} margin="auto" src="https://cdn.logojoy.com/wp-content/uploads/2018/05/30164225/572.png" />
                     </Box>
