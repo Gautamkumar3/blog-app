@@ -1,19 +1,24 @@
 import { Avatar, Box, Button, Flex, FormLabel, Heading, HStack, Image, Input, Text, Textarea } from '@chakra-ui/react'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { createPath, useParams } from 'react-router-dom'
-
+import { addAllComments, deleteComments, getAllComments, updateComments } from '../store/comment/Comment.action'
+import { DeleteIcon } from '@chakra-ui/icons'
+import UpdateCommentModal from '../components/UpdateCommentModal'
 
 
 const Singlepage = () => {
 
-    const { id } = useParams()
+    const { id } = useParams();
+    const dispatch = useDispatch();
+    const data = useSelector((store) => store.comments.data);
+
 
     const token = JSON.parse(localStorage.getItem("token")) || "";
 
     const [formData, setFormdata] = useState()
-    const [comment, setComment] = useState([]);
-    const [update,setUpdate]=useState(false)
+    const [update, setUpdate] = useState(false)
     const [singleBlog, setSignleBlog] = useState({})
 
     const handleChange = (e) => {
@@ -26,14 +31,6 @@ const Singlepage = () => {
         return res;
     }
 
-    const getComment = (id) => {
-        let res = axios.get(`http://localhost:8080/comments/`, {
-            headers: {
-                postid: id
-            }
-        })
-        return res;
-    }
 
     useEffect(() => {
         getPost(id).then((res) => {
@@ -43,22 +40,18 @@ const Singlepage = () => {
 
 
     const handleComment = (id, formData) => {
-        axios.post(`http://localhost:8080/comments`, formData, {
-            headers: {
-                authorization: token.token,
-                postid: id
-            }
-        }).then((res)=>{
-            setUpdate(!update)
-        })
+        dispatch(addAllComments(id, formData))
+        setUpdate(!update)
     }
 
     useEffect(() => {
-        getComment(id).then((res) => {
-            setComment(res.data)
-            console.log(res.data)
-        })
+        dispatch(getAllComments(id))
     }, [update])
+
+    const handleDelete = (id, commId) => {
+        dispatch(deleteComments(id, commId))
+        setUpdate(!update)
+    }
 
 
     return (
@@ -72,15 +65,22 @@ const Singlepage = () => {
                 <Input border={"none"} placeholder='Add a comment' onChange={handleChange} />
                 <Button colorScheme={"orange"} onClick={() => handleComment(singleBlog._id, formData)}>Comment</Button>
             </Flex>
-            {comment?.map((com) => <HStack spacing={5} key={com._id} my={3}>
+            {data?.map((com) => <Flex gap={5} key={com._id} my={3} w="100%" >
                 <Box>
                     <Avatar name={com.name} />
                 </Box>
-                <Box>
-                    <Text fontWeight={"bold"}>{com.name} <span style={{ color: "gray", fontWeight: "400", fontSize: "12px" }}>{com.created_at.split("T")[0]}</span></Text>
-                    <Text>{com.comments}</Text>
-                </Box>
-            </HStack>)}
+                <Flex justify="space-between" w="100%" align={"center"}>
+                    <Box>
+                        <Text fontWeight={"bold"}>{com.name} <span style={{ color: "gray", fontWeight: "400", fontSize: "12px" }}>{com.created_at.split("T")[0]}</span></Text>
+                        <Text>{com.comments}</Text>
+                    </Box>
+                    {token.id == com.userId.toString() ?
+                        <HStack mr={5} spacing={10}>
+                            <UpdateCommentModal id={id} commId={com._id} />
+                            <DeleteIcon _hover={{ mouse: "pointer" }} onClick={() => handleDelete(id, com._id)} boxSize={6} />
+                        </HStack> : null}
+                </Flex>
+            </Flex>)}
 
         </Box>
     )

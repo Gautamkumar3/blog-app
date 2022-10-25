@@ -31,7 +31,6 @@ app.post("/", Authmiddleware, async (req, res) => {
 
 app.get("/", async (req, res) => {
     const { postid } = req.headers
-
     try {
         console.log("Yes")
         const comment = await Comment.find({ postId: postid })
@@ -53,7 +52,6 @@ app.delete("/:id", Authmiddleware, async (req, res) => {
 
     try {
         if (data.id === unique) {
-            console.log(data.id, "and", unique)
             let afterDelete = await Comment.findByIdAndDelete(id);
             res.status(200).send(afterDelete);
         }
@@ -76,10 +74,11 @@ app.patch("/:id", Authmiddleware, async (req, res) => {
 
     let comment = await Comment.findById(id)
     let unique = comment.userId.toString()
-
+    console.log(data)
     try {
         if (data.id === unique) {
-            let afterUpdate = await Comment.findByIdAndUpdate(id, { $set: { comments: req.body.comments } }, { new: true });
+            let afterUpdate = await Comment.findByIdAndUpdate(id, { comments: req.body.comment }, { new: true });
+            console.log(afterUpdate)
             res.status(200).send(afterUpdate);
         }
         else {

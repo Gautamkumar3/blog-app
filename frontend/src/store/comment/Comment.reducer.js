@@ -25,8 +25,10 @@ export const commentReducer = (state = initialState, { type, payload }) => {
     switch (type) {
         case GET_COMMENT_LOADING: {
             return {
-                ...state, getComments: { ...state.getComments, loading: true }
+                ...state,
+                getComments: { ...state.getComments, loading: true }
             }
+
         }
         case GET_COMMENT_ERROR: {
             return {
@@ -54,12 +56,11 @@ export const commentReducer = (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 addComments: { ...state.addComments, loading: false, error: false },
-                data: [...state.data, payload]
             }
         }
         case UPDATE_COMMENT_LOADING: {
             return {
-                ...state, updateComments: { ...state.Comments, loading: true }
+                ...state, updateComments: { ...state.updateComments, loading: true }
             }
         }
         case UPDATE_COMMENT_ERROR: {
@@ -71,25 +72,24 @@ export const commentReducer = (state = initialState, { type, payload }) => {
             return {
                 ...state,
                 updateComments: { ...state.updateComments, loading: false, error: false },
-                data: [...state.data, payload]
             }
         }
-        case DELETE_COMMENT_LOADING : {
+        case DELETE_COMMENT_LOADING: {
             return {
-                ...state, 
-                deleteComments : {...state.deleteComments, loading:true}
+                ...state,
+                deleteComments: { ...state.deleteComments, loading: true }
             }
         }
-        case DELETE_COMMENT_ERROR : {
+        case DELETE_COMMENT_ERROR: {
             return {
-                ...state, 
-                deleteComments : {...state.deleteComments, loading:false, error:true}
+                ...state,
+                deleteComments: { ...state.deleteComments, loading: false, error: true }
             }
         }
-        case DELETE_COMMENT_SUCCESS : {
+        case DELETE_COMMENT_SUCCESS: {
             return {
-                ...state, 
-                deleteComments : {...state.deleteComments, loading:false,error:false}
+                ...state,
+                deleteComments: { ...state.deleteComments, loading: false, error: false }
             }
         }
 
