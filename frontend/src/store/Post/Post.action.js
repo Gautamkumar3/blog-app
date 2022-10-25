@@ -5,9 +5,10 @@ const token = JSON.parse(localStorage.getItem("token")) || "";
 
 
 export const getPostsData = (id) => async (dispatch) => {
+    console.log(id, "idsssss")
     dispatch({ type: GET_POST_LOADING });
     try {
-        const res = await axios.get(`http://localhost:8080/post/${id}`, {
+        const res = await axios.get(`http://localhost:8080/posts/${id}`, {
             headers: {
                 authorization: token.token
             }
@@ -42,11 +43,11 @@ export const DeletePostData = (id) => async (dispatch) => {
         const res = await axios.delete(`http://localhost:8080/posts/${id}`, {
             headers: {
                 authorization: token.token,
-                unique: userId
+                unique: id
             }
         })
         dispatch({ type: DELETE_POST_SUCCESS, payload: res.data })
-        dispatch(getPostsData(userId))
+        dispatch(getPostsData(id))
     } catch (er) {
         dispatch({ type: DELETE_POST_ERROR })
     }

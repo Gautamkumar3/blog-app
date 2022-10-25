@@ -1,18 +1,25 @@
 import { Badge, Box, Button, Center, Flex, Grid, GridItem, Heading, Image, SimpleGrid, Text } from '@chakra-ui/react'
 import React from 'react'
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom'
+import { getPostsData } from '../store/Post/Post.action';
 
 
 const BlogCard = ({ data }) => {
 
+    const navigate=useNavigate();
+    const dispatch=useDispatch()
+
     const getAuthorsdata = (id) => {
-        console.log(id)
+        dispatch(getPostsData(id))
+        navigate("/author")    
     }
 
     return (
-        <SimpleGrid columns={[1, 2, 3, 3]} gap={5} w={["90%", "80%"]} m="auto" p={5}>
+        <SimpleGrid columns={[1, 2, 3, 3]} gap={10} w={["90%", "80%"]} m="auto" p={5}>
             {data?.map((el, i) => {
-                return <Box key={el._id}>
-                    <Box>
+                return <Box key={el._idds}>
+                    <Box border="1px solid gray" p={5}>
                         <Box>
                             <Image h={"170px"} w="100%" src={el.image} />
                         </Box>

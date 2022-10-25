@@ -97,12 +97,6 @@ const Home = () => {
     }
 
 
-
-
-    const handleRead = () => {
-        navigate("/post")
-    }
-
     return (
         <Box pos="relative">
             <Box textAlign="center" position="absolute" top="5%" left="50%" transform="translate(-50%, -50%)">
