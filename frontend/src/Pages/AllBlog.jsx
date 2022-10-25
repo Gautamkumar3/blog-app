@@ -5,9 +5,6 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import Styles from "./Home.module.css"
 
 
-
-
-
 const AllBlog = () => {
 
     const token = JSON.parse(localStorage.getItem("token")).token || "";
