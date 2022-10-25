@@ -42,6 +42,7 @@ export const authReducer = (state = initialState, { type, payload }) => {
             }
         }
         case LOGOUT_SUCCESS: {
+            console.log("Yes")
             localStorage.removeItem("token")
         }
         default: {

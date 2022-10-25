@@ -14,9 +14,10 @@ import {
     InputRightElement,
     Center,
     Image,
+    useToast,
 
 } from "@chakra-ui/react";
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { BiHide, BiShow } from "react-icons/bi"
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
@@ -26,8 +27,8 @@ const Login = () => {
 
     const [data, setData] = useState({ email: "", password: "" });
     const dispatch = useDispatch();
-    
-
+    const toast = useToast()
+    const navigate=useNavigate()
     const [show, setShow] = useState(false)
     const handleClick = () => setShow(!show)
 
@@ -41,6 +42,17 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         dispatch(UserLogin(data))
+        toast({
+            title: 'Login Successful',
+            description: "Your are redirected to home page",
+            status: 'success',
+            duration: 5000,
+            isClosable: true,
+            position:"top"
+        })
+        setTimeout(() => {
+            navigate("/")
+        }, 2000)
     }
 
 

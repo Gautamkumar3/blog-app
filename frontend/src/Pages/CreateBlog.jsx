@@ -7,7 +7,7 @@ const CreateBlog = () => {
     const [formData, setFormdata] = useState({ title: "", content: "", image: "" })
     const [imageUrl, setImageUrl] = useState("")
     const toast = useToast()
-    const token = JSON.parse(localStorage.getItem("token")).token || "";
+    const token = JSON.parse(localStorage.getItem("token")) || "";
 
 
     const postDetails = (imageUrl) => {
@@ -33,7 +33,6 @@ const CreateBlog = () => {
                 body: data
             }).then((res) => res.json()).then((data) => {
                 setImageUrl(data.url.toString());
-                console.log(data)
 
             }).catch((er) => {
                 console.log(er)
@@ -52,7 +51,9 @@ const CreateBlog = () => {
     }
 
     const handleChange = (e) => {
-        postDetails(e.target.files[0])
+        if (e.target.name == "image") {
+            postDetails(e.target.files[0])
+        }
         const { name, value, type } = e.target;
         const updatedValue = type === "file" ? imageUrl : value
         setFormdata({ ...formData, [name]: updatedValue })
@@ -61,9 +62,10 @@ const CreateBlog = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+      
         axios.post("http://localhost:8080/posts", formData, {
             headers: {
-                authorization: token,
+                authorization: token.token,
             }
         }).then((res) => {
             alert("Done")
@@ -73,11 +75,11 @@ const CreateBlog = () => {
 
     return (
 
-        <SimpleGrid columns={[1,2]} spacing={20} w="80%" margin="auto" my={10}>
-            <Box p={[0,5]}>
-                <Image h="100%" src="https://images.unsplash.com/photo-1586943759341-be5595944989?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" />
+        <SimpleGrid columns={[1, 2]} spacing={10} w="80%" margin="auto" my={10}>
+            <Box p={[0, 5]}>
+                <Image h="100%" src="https://media.istockphoto.com/photos/blogging-blog-word-coder-coding-using-laptop-picture-id626669886?s=612x612" />
             </Box>
-            <Box bg="white" px={5} rounded="md" w="90%" height="fit-content" boxShadow='2xl' p='6'  m="auto">
+            <Box bg="white" px={5} rounded="md" w="90%" height="fit-content" boxShadow='2xl' p='6' m="auto">
                 <Box mb={-10}>
                     <Image w={"200px"} margin="auto" src="https://cdn.logojoy.com/wp-content/uploads/2018/05/30164225/572.png" />
                 </Box>

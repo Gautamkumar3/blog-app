@@ -15,14 +15,14 @@ const fs = require('fs');
 
 app.get("/all", async (req, res) => {
     try {
-        const allPost = await Post.find();
+        const allPost = await Post.find().populate("userId","-password");
         return res.status(200).send(allPost)
     } catch (er) {
         return res.status(404).send("Something went wrong")
     }
 })
 
-// ################### Post related by selected user ################### 
+// ###################  Post related by selected user ################### 
 
 app.get("/:id", async (req, res) => {
     const { id } = req.params;

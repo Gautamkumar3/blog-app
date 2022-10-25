@@ -1,41 +1,35 @@
-import { Badge, Box, Center, Flex, Heading, Image, Text } from '@chakra-ui/react'
+import { Badge, Box, Button, Center, Flex, Grid, GridItem, Heading, Image, SimpleGrid, Text } from '@chakra-ui/react'
 import React from 'react'
 
-let arr = [1, 2, 3, 4, 3, 5, 6, 7, 8, 9, 8]
 
-const BlogCard = () => {
+const BlogCard = ({ data }) => {
+
+    const getAuthorsdata = (id) => {
+        console.log(id)
+    }
+
     return (
-        <Box w="70%" m="auto">
-            {arr.map((el, i) => {
-                if (i % 2 === 0) {
-                    return <Flex justify="space-between">
-                        <Box w="60%" border="5px solid red" textAlign="left" pl={5}>
-                            <Heading fontWeight={500}>Heading</Heading>
-                            <Text>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore dolorem maiores ullam nisi nesciunt quibusdam temporibus quia iure laborum facilis, esse, voluptatum consectetur assumenda saepe accusantium sequi, illum aspernatur ex.</Text>
-                            <Flex>
-                            <Badge colorScheme='green'>Date</Badge>
-                            </Flex>
+        <SimpleGrid columns={[1, 2, 3, 3]} gap={5} w={["90%", "80%"]} m="auto" p={5}>
+            {data?.map((el, i) => {
+                return <Box key={el._id}>
+                    <Box>
+                        <Box>
+                            <Image h={"170px"} w="100%" src={el.image} />
                         </Box>
-                        <Box w="35%" border="4px solid green" p={5}>
-                            <Center>
-                                <Image h="150px" src="https://miro.medium.com/fit/c/275/184/1*-yEFU9FdyvuWbbPtLG1kUw.png" />
-                            </Center>
+                        <Box maxH={"205px"} overflowY="hidden">
+                            <Text fontSize={"xl"} fontWeight="bold">{el.title}</Text>
+                            <Text>{el.content}</Text>
                         </Box>
-                    </Flex>
-                } else {
-                    return <Flex my={5} justify="space-between">
-                        <Box w="35%" border="4px solid green" p={5}>
-                            <Center>
-                                <Image h="150px" src="https://rukminim1.flixcart.com/image/200/200/ktop5e80/tablet/x/9/o/mk2k3hn-a-apple-original-imag6yy7xjjugz4w.jpeg?q=70" />
-                            </Center>
-                        </Box>
-                        <Box w="60%" border="5px solid red" >
-                            <Heading>content</Heading>
-                        </Box>
-                    </Flex>
-                }
+                        <Flex justify={"space-between"} mt={3}>
+                            <Badge colorScheme="orange" borderRadius="20px" p={1}>{el.created_at.split("T")[0]}</Badge>
+                            <Badge onClick={(() => getAuthorsdata(el.userId._id))} colorScheme="orange" borderRadius="20px" p={1}>author : {el.userId.name}</Badge>
+                        </Flex>
+
+                        <Button colorScheme="teal" display="block" m="auto" mt={3}>Read More</Button>
+                    </Box>
+                </Box>
             })}
-        </Box>
+        </SimpleGrid >
     )
 }
 

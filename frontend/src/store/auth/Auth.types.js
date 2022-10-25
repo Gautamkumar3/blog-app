@@ -7,4 +7,4 @@ export const AUTH_SIGNUP_SUCCESS = 'auth/signup/success'
 export const AUTH_SIGNUP_LOADING = 'auth/signup/loading'
 export const AUTH_SIGNUP_ERROR = 'auth/signup/error'
 
-export const LOGOUT_SUCCESS = "logout/success"
+export const LOGOUT_SUCCESS = "auth/logout/success"

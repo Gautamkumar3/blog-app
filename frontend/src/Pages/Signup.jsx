@@ -6,14 +6,18 @@ import {
     Flex,
     FormLabel,
     Input,
-    Image
+    Image,
+    useToast
 } from "@chakra-ui/react";
 import { UserSignup } from '../store/auth/Auth.action';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const Signup = () => {
 
     const [formData, setFormdata] = useState({ name: "", email: "", password: "" });
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const toast = useToast();
+    const navigate = useNavigate()
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -24,6 +28,18 @@ const Signup = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
         dispatch(UserSignup(formData))
+        toast({
+            title: 'Account created.',
+            description: "We've created your account for you.",
+            status: 'success',
+            duration: 5000,
+            isClosable: true,
+            position: "top"
+        })
+        setTimeout(() => {
+            navigate("/login")
+        }, 2000)
+
     }
 
     return (

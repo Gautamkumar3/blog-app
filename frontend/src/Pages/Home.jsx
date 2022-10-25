@@ -5,7 +5,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import Styles from "./Home.module.css"
 
 const Home = () => {
-    const token = JSON.parse(localStorage.getItem("token")).token || "";
+    const token = JSON.parse(localStorage.getItem("token")) || "";
 
     const [data, setData] = useState([]);
     const [imageUrl, setImageUrl] = useState("")
@@ -22,7 +22,7 @@ const Home = () => {
     const handleDelete = (id, userId) => {
         axios.delete(`http://localhost:8080/posts/${id}`, {
             headers: {
-                authorization: token,
+                authorization: token.token,
                 unique: userId
             }
         }).then((res) => {
@@ -88,7 +88,7 @@ const Home = () => {
         e.preventDefault()
         axios.post("http://localhost:8080/posts", formData, {
             headers: {
-                authorization: token,
+                authorization: token.token,
             }
         }).then((res) => {
             alert("Done")
