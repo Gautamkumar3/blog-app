@@ -18,7 +18,6 @@ const AllBlog = () => {
     useEffect(() => {
         axios.get("http://localhost:8080/posts/all").then((res) => {
             setData(res.data)
-            console.log(res.data, "dkfpasodifjs")
         })
     }, [])
 

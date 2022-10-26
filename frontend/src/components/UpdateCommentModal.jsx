@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react'
 import { updateComments } from '../store/comment/Comment.action'
 import { useDispatch } from 'react-redux';
-
+import { FiEdit } from "react-icons/fi";
 const UpdateCommentModal = ({ id, commId }) => {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -27,7 +27,7 @@ const UpdateCommentModal = ({ id, commId }) => {
 
     return (
         <div>
-            <Button colorScheme={"blue"} onClick={onOpen}>Update</Button>
+            <Button colorScheme={"blue"} onClick={onOpen}><FiEdit /></Button>
 
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />

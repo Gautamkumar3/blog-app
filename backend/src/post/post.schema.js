@@ -3,7 +3,7 @@ const mongoose = require("mongoose")
 const postSchema = new mongoose.Schema({
     title: { type: String, required: true },
     content: { type: String, required: true },
-    image: { type: String, required: true },
+    image: { type: String, required: true,  default: "https://thumbs.dreamstime.com/b/no-image-available-icon-vector-illustration-flat-design-140633878.jpg" },
     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'user', required: true }
 },
     {

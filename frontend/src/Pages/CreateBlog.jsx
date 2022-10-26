@@ -1,16 +1,19 @@
 import { Box, Flex, FormControl, FormLabel, Image, Input, SimpleGrid, Textarea, useToast } from '@chakra-ui/react'
 import axios from 'axios'
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { AddPostData } from '../store/Post/Post.action'
 
 const CreateBlog = () => {
 
-    const [formData, setFormdata] = useState({ title: "", content: "", image: "" })
-    const [imageUrl, setImageUrl] = useState("")
+    const [formData, setFormdata] = useState({ title: "", content: "" })
+    const [imageUrl, setImageUrl] = useState({ image: "" })
     const toast = useToast()
     const token = JSON.parse(localStorage.getItem("token")) || "";
-
+    const dispatch = useDispatch()
 
     const postDetails = (imageUrl) => {
+        console.log(imageUrl, "dfasdfoksdfjasdfsd")
         if (imageUrl === undefined) {
             toast({
                 title: 'Please seclect an Image!',
@@ -21,9 +24,8 @@ const CreateBlog = () => {
                 position: "top"
             })
             return;
-        }
+        } else {
 
-        if (imageUrl.type === "image/jpeg" || imageUrl.type === "image/png") {
             const data = new FormData();
             data.append("file", imageUrl);
             data.append("upload_preset", "Gk-chat")
@@ -32,43 +34,30 @@ const CreateBlog = () => {
                 method: "post",
                 body: data
             }).then((res) => res.json()).then((data) => {
-                setImageUrl(data.url.toString());
-
+                setImageUrl({ image: data.url.toString() });
             }).catch((er) => {
                 console.log(er)
             })
-        } else {
-            toast({
-                title: 'Please seclect an Image!',
-                description: "wraning",
-                status: 'success',
-                duration: 5000,
-                isClosable: true,
-                position: "top"
-            })
-            return;
         }
     }
 
     const handleChange = (e) => {
-        if (e.target.name == "image") {
-            postDetails(e.target.files[0])
-        }
-        const { name, value, type } = e.target;
-        const updatedValue = type === "file" ? imageUrl : value
-        setFormdata({ ...formData, [name]: updatedValue })
+        const { name, value } = e.target;
+        setFormdata({ ...formData, [name]: value })
     }
 
 
     const handleSubmit = (e) => {
         e.preventDefault()
-      
-        axios.post("http://localhost:8080/posts", formData, {
-            headers: {
-                authorization: token.token,
-            }
-        }).then((res) => {
-            alert("Done")
+        dispatch(AddPostData({...formData,...imageUrl}))
+   
+        toast({
+            title: 'Post created.',
+            description: "Post has been created successfully",
+            status: 'success',
+            duration: 5000,
+            isClosable: true,
+            position: "top"
         })
 
     }
@@ -91,7 +80,7 @@ const CreateBlog = () => {
                             <Input placeholder='blog title' name="title" onChange={handleChange} />
                             <FormLabel mt={5}>Blog Content</FormLabel>
                             <Textarea minH="200px" mb={5} placeholder='Type your content here' name='content' onChange={handleChange} />
-                            <input type="file" name="image" onChange={handleChange} />
+                            <input type="file" name="image" onChange={(e) => postDetails(e.target.files[0])} />
                             <Input mt={5} type="submit" value="Create Blog" color={"white"} bg="tomato" w="full" />
                         </FormControl>
                     </form>

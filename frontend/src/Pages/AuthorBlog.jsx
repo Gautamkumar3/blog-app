@@ -10,7 +10,7 @@ const AuthorBlog = () => {
 
   return (
     <Box w={"70%"} m="auto">
-      {data?.map((blog) => <Flex key={blog.id} h="180px" gap={15} my={5}>
+      {data?.map((blog) => <Flex key={blog._id} h="180px" gap={15} my={5}>
         <Box w={"70%"} p={2}>
           <Box overflow="hidden" maxH={"130px"}>
             <Text _hover={{ cursor: "pointer" }} onClick={() => navigate(`/author/${blog._id}`)} fontSize="2xl" fontWeight="500" >{blog.title}</Text>

@@ -1,24 +1,29 @@
 import { Badge, Box, Button, Center, Flex, Grid, GridItem, Heading, Image, SimpleGrid, Text } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { getPostsData } from '../store/Post/Post.action';
 
 
 const BlogCard = ({ data }) => {
 
-    const navigate=useNavigate();
-    const dispatch=useDispatch()
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch()
 
     const getAuthorsdata = (id) => {
         dispatch(getPostsData(id))
-        navigate("/author")    
     }
+
+    useEffect(() => {
+      
+    }, [])
 
     return (
         <SimpleGrid columns={[1, 2, 3, 3]} gap={10} w={["90%", "80%"]} m="auto" p={5}>
             {data?.map((el, i) => {
-                return <Box key={el._idds}>
+                return <Box key={el._id}>
+
                     <Box border="1px solid gray" p={5}>
                         <Box>
                             <Image h={"170px"} w="100%" src={el.image} />
@@ -29,7 +34,9 @@ const BlogCard = ({ data }) => {
                         </Box>
                         <Flex justify={"space-between"} mt={3}>
                             <Badge colorScheme="orange" borderRadius="20px" p={1}>{el.created_at.split("T")[0]}</Badge>
-                            <Badge onClick={(() => getAuthorsdata(el.userId._id))} colorScheme="orange" borderRadius="20px" p={1}>author : {el.userId.name}</Badge>
+                            <Link to="/author">
+                                <Badge onClick={(() => { getAuthorsdata(el.userId._id) })} colorScheme="orange" borderRadius="20px" p={1}>author : {el.userId.name}</Badge>
+                            </Link>
                         </Flex>
 
                         <Button colorScheme="teal" display="block" m="auto" mt={3}>Read More</Button>

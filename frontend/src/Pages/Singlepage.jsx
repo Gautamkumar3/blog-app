@@ -6,7 +6,7 @@ import { createPath, useParams } from 'react-router-dom'
 import { addAllComments, deleteComments, getAllComments, updateComments } from '../store/comment/Comment.action'
 import { DeleteIcon } from '@chakra-ui/icons'
 import UpdateCommentModal from '../components/UpdateCommentModal'
-
+import { FiEdit } from "react-icons/fi";
 
 const Singlepage = () => {
 
@@ -58,8 +58,14 @@ const Singlepage = () => {
         <Box w={"70%"} m="auto" >
             <Box mb={"10%"}>
                 <Heading my={5}>{singleBlog.title}</Heading>
+               
                 <Image maxH={"300px"} w="100%" src={singleBlog.image} />
                 <Text mt={5} fontFamily="source-serif-pro, Georgia, Cambria, serif;" fontSize={"xl"}>{singleBlog.content}</Text>
+                {token.id === singleBlog.userId ?
+                    <Flex justify={"right"} gap={10} my={10}>
+                        <FiEdit _hover={{ cursor: "pointer" }} size={"30px"} />
+                        <DeleteIcon _hover={{ cursor: "pointer" }} boxSize={7} />
+                    </Flex> : null}
             </Box>
             <Flex my={10} borderBottom="1px solid black">
                 <Input border={"none"} placeholder='Add a comment' onChange={handleChange} />
@@ -77,7 +83,7 @@ const Singlepage = () => {
                     {token.id == com.userId.toString() ?
                         <HStack mr={5} spacing={10}>
                             <UpdateCommentModal id={id} commId={com._id} />
-                            <DeleteIcon _hover={{ mouse: "pointer" }} onClick={() => handleDelete(id, com._id)} boxSize={6} />
+                            <DeleteIcon _hover={{ cursor: "pointer" }} onClick={() => handleDelete(id, com._id)} boxSize={6} />
                         </HStack> : null}
                 </Flex>
             </Flex>)}
@@ -91,26 +97,3 @@ export default Singlepage
 
 
 
-{/* <div>
-<Flex bg="gray.100" justify="center" h="100vh" >
-    <Box bg="white" px={5} rounded="md" w="30%" mt={"5%"} height="fit-content">
-
-        <Box textAlign={"left"} pb={10}>
-
-            <Input placeholder='comments' name="comments" onChange={handleChange} />
-            <Button onClick={() => { handleComment(id) }}>Comment</Button>
-        </Box>
-    </Box>
-</Flex>
-{
-
-    comment?.map((el) =>
-        <Flex justify={"space-around"}>
-            <Heading>{el.name}</Heading>
-
-            <Heading>{el.comments}</Heading>
-        </Flex>
-    )
-
-}
-</div> */}

@@ -20,7 +20,7 @@ export const getPostsData = (id) => async (dispatch) => {
     }
 }
 
-export const PostPostData = (data, id) => async (dispatch) => {
+export const AddPostData = (data) => async (dispatch) => {
     dispatch({ type: ADD_POST_LOADING });
 
     try {
@@ -30,7 +30,7 @@ export const PostPostData = (data, id) => async (dispatch) => {
             }
         })
         dispatch({ type: ADD_POST_SUCCESS, payload: res.data });
-        dispatch(getPostsData(id))
+       
     } catch (er) {
         dispatch({ type: ADD_POST_ERROR })
     }

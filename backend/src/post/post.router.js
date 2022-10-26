@@ -22,7 +22,7 @@ app.get("/all", async (req, res) => {
     }
 })
 
-// ###################  Post related by selected user ################### 
+// ###################  Post related by selected writer ################### 
 
 app.get("/:id", async (req, res) => {
     const { id } = req.params;
@@ -59,7 +59,7 @@ app.post("/", Authmiddleware, WriterAutMiddleware, async (req, res) => {
     try {
         const post = new Post({ ...req.body, userId: data.id })
         await post.save();
-        res.status(200).send("Post created Successfully")
+        res.status(200).send(post)
     } catch (er) {
         res.status(400).send({ msg: er })
     }
