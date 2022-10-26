@@ -10,24 +10,19 @@ import {
     Input,
     useDisclosure,
     Button,
+    Textarea,
 } from '@chakra-ui/react'
-import { updateComments } from '../store/comment/Comment.action'
 import { useDispatch } from 'react-redux';
 import { FiEdit } from "react-icons/fi";
+import { UpdatePostData } from '../store/Post/Post.action';
 
 
 
-const UpdateCommentModal = ({ id, commId }) => {
+const UpdatePostModal = ({ id, userId,handlePostUpdate }) => {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [comment, setComment] = useState()
-    const dispatch = useDispatch()
-
-    const handleUpdate = (id, commId) => {
-        dispatch(updateComments(id, commId, comment))
-        onClose()
-    }
-
+    const [post, setPost] = useState()
+   
     return (
         <div>
             <Button colorScheme={"blue"} onClick={onOpen}><FiEdit /></Button>
@@ -35,15 +30,15 @@ const UpdateCommentModal = ({ id, commId }) => {
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>Update comment here</ModalHeader>
+                    <ModalHeader>Update Post Content</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                        <Input placeholder='type your comment here' onChange={(e) => setComment({ comment: e.target.value })} />
+                        <Textarea minH={"200px"} placeholder="type your content here" onChange={(e) => setPost({ content: e.target.value })} />
                     </ModalBody>
 
                     <ModalFooter>
-                        <Button m={"auto"} colorScheme='blue' mr={3} onClick={() => handleUpdate(id, commId, comment)}>
-                            Update Comment
+                        <Button m={"auto"} colorScheme='blue' mr={3} onClick={() => handlePostUpdate(id, userId, post,onClose)}>
+                            Update post
                         </Button>
                     </ModalFooter>
                 </ModalContent>
@@ -52,4 +47,4 @@ const UpdateCommentModal = ({ id, commId }) => {
     )
 }
 
-export default UpdateCommentModal
+export default UpdatePostModal

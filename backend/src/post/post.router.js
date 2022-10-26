@@ -15,7 +15,7 @@ const fs = require('fs');
 
 app.get("/all", async (req, res) => {
     try {
-        const allPost = await Post.find().populate("userId","-password");
+        const allPost = await Post.find().populate("userId", "-password");
         return res.status(200).send(allPost)
     } catch (er) {
         return res.status(404).send("Something went wrong")
@@ -104,7 +104,8 @@ app.patch("/:id", Authmiddleware, WriterAutMiddleware, async (req, res) => {
 
     try {
         if (data.id === unique) {
-            let afterUpdate = await Post.findByIdAndUpdate(id, { $set: { content: req.body.content } }, { new: true });
+            let afterUpdate = await Post.findByIdAndUpdate(id, { content: req.body.content }, { new: true });
+            console.log(afterUpdate)
             res.status(200).send(afterUpdate);
         }
         else {

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { AUTH_LOGIN_ERROR, AUTH_LOGIN_LOADING, AUTH_LOGIN_SUCCESS, AUTH_SIGNUP_ERROR, AUTH_SIGNUP_LOADING, AUTH_SIGNUP_SUCCESS, LOGOUT_SUCCESS } from "./Auth.types";
+import { AUTH_LOGIN_ERROR, AUTH_LOGIN_LOADING, AUTH_LOGIN_SUCCESS, AUTH_SIGNUP_ERROR, AUTH_SIGNUP_LOADING, AUTH_SIGNUP_SUCCESS, getWriterId, LOGOUT_SUCCESS } from "./Auth.types";
 
 
 
@@ -30,4 +30,7 @@ export const UserLogout = () => async (dispatch) => {
     dispatch({ type: LOGOUT_SUCCESS })
 }
 
+export const writerId = (id) => async (dispatch) => {
+    dispatch({ type: getWriterId, payload: id })
+}
 

@@ -1,7 +1,8 @@
 import { Badge, Box, Button, Center, Flex, Grid, GridItem, Heading, Image, SimpleGrid, Text } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom'
+import { writerId } from '../store/auth/Auth.action';
 import { getPostsData } from '../store/Post/Post.action';
 
 
@@ -9,15 +10,15 @@ const BlogCard = ({ data }) => {
 
 
     const navigate = useNavigate();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const id = useSelector((store) => store.auth.id);
+
 
     const getAuthorsdata = (id) => {
-        dispatch(getPostsData(id))
+        dispatch(writerId(id))
     }
 
-    useEffect(() => {
-      
-    }, [])
+
 
     return (
         <SimpleGrid columns={[1, 2, 3, 3]} gap={10} w={["90%", "80%"]} m="auto" p={5}>
@@ -39,7 +40,7 @@ const BlogCard = ({ data }) => {
                             </Link>
                         </Flex>
 
-                        <Button colorScheme="teal" display="block" m="auto" mt={3}>Read More</Button>
+                        <Button colorScheme="teal" display="block" m="auto" mt={3} onClick={() => navigate(`/blog/${el._id}`)} >Read More</Button>
                     </Box>
                 </Box>
             })}
