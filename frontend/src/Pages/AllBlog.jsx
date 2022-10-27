@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import axios from "axios"
 import { Box, Button, Flex, FormControl, FormLabel, Heading, Image, Input, Text, Textarea, useToast } from '@chakra-ui/react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import Styles from "./Home.module.css"
 import BlogCard from '../components/BlogCard';
 
 
