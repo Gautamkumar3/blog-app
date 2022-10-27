@@ -7,7 +7,7 @@ import BlogCard from '../components/BlogCard';
 
 const AllBlog = () => {
 
-    const token = JSON.parse(localStorage.getItem("token")).token || "";
+    const token = JSON.parse(localStorage.getItem("token")) || "";
 
     const [data, setData] = useState([]);
 

@@ -43,6 +43,7 @@ const Singlepage = () => {
 
 
     const handleComment = (id, formData) => {
+        console.log(id,formData)
         dispatch(addAllComments(id, formData))
         setUpdate(!update)
     }

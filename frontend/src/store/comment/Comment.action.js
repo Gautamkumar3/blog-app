@@ -11,6 +11,7 @@ export const getAllComments = (id) => async (dispatch) => {
   try {
     const res = await axios.get(`http://localhost:8080/comments`, {
       headers: {
+        authorization: token.token,
         postid: id
       }
     })
