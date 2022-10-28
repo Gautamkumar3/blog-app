@@ -1,4 +1,6 @@
 const express = require("express")
+const http = require("http");
+const { Server } = require("socket.io")
 const cors = require("cors");
 const Connect = require("./config/db");
 require('dotenv').config();
@@ -9,6 +11,9 @@ const commentRouter = require("./comment/comment.router")
 
 
 const app = express();
+const server = http.createServer(app)
+const io = new Server(server)
+
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
@@ -22,7 +27,7 @@ app.get("/", (req, res) => {
 })
 
 
-app.listen(PORT, async () => {
+server.listen(PORT, async () => {
     await Connect()
     console.log(`Server is running on port ${PORT}`)
 })

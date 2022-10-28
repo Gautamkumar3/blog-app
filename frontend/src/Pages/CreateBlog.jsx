@@ -6,14 +6,15 @@ import { AddPostData } from '../store/Post/Post.action'
 
 const CreateBlog = () => {
 
-    const [formData, setFormdata] = useState({ title: "", content: "" })
-    const [imageUrl, setImageUrl] = useState({ image: "" })
+    const [title, setTitle] = useState("")
+    const [content, setContent] = useState("")
+    const [imageUrl, setImageUrl] = useState("")
     const toast = useToast()
     const token = JSON.parse(localStorage.getItem("token")) || "";
     const dispatch = useDispatch()
 
     const postDetails = (imageUrl) => {
-        console.log(imageUrl, "dfasdfoksdfjasdfsd")
+
         if (imageUrl === undefined) {
             toast({
                 title: 'Please seclect an Image!',
@@ -34,23 +35,23 @@ const CreateBlog = () => {
                 method: "post",
                 body: data
             }).then((res) => res.json()).then((data) => {
-                setImageUrl({ image: data.url.toString() });
+                setImageUrl(data.url.toString());
+                console.log(data.url.toString())
+                return;
             }).catch((er) => {
                 console.log(er)
             })
         }
     }
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormdata({ ...formData, [name]: value })
-    }
+
 
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(AddPostData({...formData,...imageUrl}))
-   
+        console.log({ title: title, content: content, image: imageUrl })
+        dispatch(AddPostData({ title: title, content: content, image: imageUrl }))
+
         toast({
             title: 'Post created.',
             description: "Post has been created successfully",
@@ -77,9 +78,9 @@ const CreateBlog = () => {
                     <form onSubmit={handleSubmit} >
                         <FormControl isRequired>
                             <FormLabel>Blog Title</FormLabel>
-                            <Input placeholder='blog title' name="title" onChange={handleChange} />
+                            <Input placeholder='blog title' name="title" onChange={(e) => setTitle(e.target.value)} />
                             <FormLabel mt={5}>Blog Content</FormLabel>
-                            <Textarea minH="200px" mb={5} placeholder='Type your content here' name='content' onChange={handleChange} />
+                            <Textarea minH="200px" mb={5} placeholder='Type your content here' name='content' onChange={(e) => setContent(e.target.value)} />
                             <input type="file" name="image" onChange={(e) => postDetails(e.target.files[0])} />
                             <Input mt={5} type="submit" value="Create Blog" color={"white"} bg="tomato" w="full" />
                         </FormControl>

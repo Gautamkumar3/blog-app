@@ -15,10 +15,12 @@ const Singlepage = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
     const data = useSelector((store) => store.comments.data);
-    const WriterId = localStorage.getItem("id")
     const toast = useToast()
     const navigate = useNavigate()
     const token = JSON.parse(localStorage.getItem("token")) || "";
+    let WriterId;
+
+
 
     const [formData, setFormdata] = useState()
     const [update, setUpdate] = useState(false)
@@ -43,14 +45,14 @@ const Singlepage = () => {
 
 
     const handleComment = (id, formData) => {
-        console.log(id,formData)
+        console.log(id, formData)
         dispatch(addAllComments(id, formData))
         setUpdate(!update)
     }
 
     useEffect(() => {
         dispatch(getAllComments(id))
-        dispatch(getPostsData(WriterId))
+        dispatch(getPostsData(token.id))
     }, [update])
 
     const handleDelete = (id, commId) => {
@@ -59,6 +61,7 @@ const Singlepage = () => {
     }
 
     const handlePostDelete = (id, writerId) => {
+        console.log(id, writerId)
         dispatch(DeletePostData(id, writerId))
         setUpdate(!update)
         toast({
@@ -74,11 +77,11 @@ const Singlepage = () => {
 
     }
 
-    const handlePostUpdate = (id,userId,post,onClose) => {
-         dispatch(UpdatePostData(id, userId, post))
-         setUpdate(!update)
-         onClose()
-         toast({
+    const handlePostUpdate = (id, userId, post, onClose) => {
+        dispatch(UpdatePostData(id, userId, post))
+        setUpdate(!update)
+        onClose()
+        toast({
             title: "Post Content updated successfully",
             status: 'success',
             duration: 5000,
@@ -97,8 +100,8 @@ const Singlepage = () => {
                 <Text mt={5} fontFamily="source-serif-pro, Georgia, Cambria, serif;" fontSize={"xl"}>{singleBlog.content}</Text>
                 {token.id === singleBlog.userId ?
                     <Flex justify={"right"} gap={10} my={10}>
-                        <UpdatePostModal id={singleBlog._id} userId={WriterId} handlePostUpdate={handlePostUpdate} />
-                        <DeleteIcon _hover={{ cursor: "pointer" }} boxSize={7} onClick={() => handlePostDelete(singleBlog._id, WriterId)} />
+                        <UpdatePostModal id={singleBlog._id} userId={token.id} handlePostUpdate={handlePostUpdate} />
+                        <DeleteIcon _hover={{ cursor: "pointer" }} boxSize={7} onClick={() => handlePostDelete(singleBlog._id, token.id)} />
                     </Flex> : null}
             </Box>
             <Flex my={10} borderBottom="1px solid black">
