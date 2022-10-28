@@ -49,17 +49,30 @@ const CreateBlog = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log({ title: title, content: content, image: imageUrl })
-        dispatch(AddPostData({ title: title, content: content, image: imageUrl }))
-
-        toast({
-            title: 'Post created.',
-            description: "Post has been created successfully",
-            status: 'success',
-            duration: 5000,
-            isClosable: true,
-            position: "top"
+        dispatch(AddPostData({ title: title, content: content, image: imageUrl })).then((res) => {
+            console.log(res)
+            if (res) {
+                toast({
+                    title: 'Post created.',
+                    description: "Post has been created successfully",
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true,
+                    position: "top"
+                })
+            } else {
+                toast({
+                    title: 'All fields are required.',
+                    description: "Fill all the input fields.",
+                    status: 'error',
+                    duration: 5000,
+                    isClosable: true,
+                    position: "top"
+                })
+            }
         })
+
+
 
     }
 

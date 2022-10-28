@@ -13,12 +13,12 @@ export const authReducer = (state = initialState, { type, payload }) => {
     switch (type) {
         case AUTH_SIGNUP_LOADING: {
             return {
-                ...state, loading: true
+                ...state, loading: true, 
             }
         }
         case AUTH_SIGNUP_ERROR: {
             return {
-                ...state, error: true, loading: false
+                ...state, error: true, loading: false,
             }
         }
         case AUTH_SIGNUP_SUCCESS: {
@@ -28,12 +28,12 @@ export const authReducer = (state = initialState, { type, payload }) => {
         }
         case AUTH_LOGIN_LOADING: {
             return {
-                ...state, loading: true
+                ...state, loading: true, token:""
             }
         }
         case AUTH_LOGIN_ERROR: {
             return {
-                ...state, loading: false, error: true
+                ...state, loading: false, error: true, token:""
             }
         }
         case AUTH_LOGIN_SUCCESS: {
@@ -44,6 +44,9 @@ export const authReducer = (state = initialState, { type, payload }) => {
         }
         case LOGOUT_SUCCESS: {
             localStorage.removeItem("token")
+            return {
+                ...state, loading: false, error: false, token: ""
+            }
         }
         case getWriterId: {
             localStorage.setItem("id", payload)
