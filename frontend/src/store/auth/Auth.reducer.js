@@ -1,12 +1,11 @@
 import { AUTH_LOGIN_ERROR, AUTH_LOGIN_LOADING, AUTH_LOGIN_SUCCESS, AUTH_SIGNUP_ERROR, AUTH_SIGNUP_LOADING, AUTH_SIGNUP_SUCCESS, getWriterId, LOGOUT_SUCCESS } from "./Auth.types";
 
-// const token = JSON.parse(localStorage.getItem("token")).token || "";
+// const token = JSON.parse(localStorage.getItem("token")) || "";
 
 const initialState = {
     token: "",
     loading: false,
     error: false,
-    id: ""
 }
 
 export const authReducer = (state = initialState, { type, payload }) => {
@@ -46,12 +45,6 @@ export const authReducer = (state = initialState, { type, payload }) => {
             localStorage.removeItem("token")
             return {
                 ...state, loading: false, error: false, token: ""
-            }
-        }
-        case getWriterId: {
-            localStorage.setItem("id", payload)
-            return {
-                ...state, id: payload
             }
         }
         default: {

@@ -32,7 +32,7 @@ app.post("/", Authmiddleware, async (req, res) => {
 app.get("/", async (req, res) => {
     const { postid } = req.headers
     try {
-        console.log("Yes")
+
         const comment = await Comment.find({ postId: postid })
         res.send(comment)
     } catch (er) {

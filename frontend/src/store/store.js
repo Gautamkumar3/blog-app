@@ -1,4 +1,4 @@
-import { legacy_createStore, applyMiddleware, combineReducers } from "redux"
+import { legacy_createStore, applyMiddleware, combineReducers, compose } from "redux"
 import thunk from "redux-thunk"
 import { authReducer } from "./auth/Auth.reducer";
 import { commentReducer } from "./comment/Comment.reducer";
@@ -10,6 +10,8 @@ const rootReducer = combineReducers({
     comments: commentReducer
 });
 
-export const store = legacy_createStore(rootReducer, applyMiddleware(thunk))
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+export const store = legacy_createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
 
 

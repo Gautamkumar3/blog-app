@@ -1,7 +1,7 @@
 import { Box, Flex, FormControl, FormLabel, Image, Input, SimpleGrid, Textarea, useToast } from '@chakra-ui/react'
 import axios from 'axios'
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { AddPostData } from '../store/Post/Post.action'
 
 const CreateBlog = () => {
@@ -12,6 +12,8 @@ const CreateBlog = () => {
     const toast = useToast()
     const token = JSON.parse(localStorage.getItem("token")) || "";
     const dispatch = useDispatch()
+    const post = useSelector((store) => store.posts)
+
 
     const postDetails = (imageUrl) => {
 
@@ -49,9 +51,9 @@ const CreateBlog = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        console.log(({ title: title, content: content, image: imageUrl }))
         dispatch(AddPostData({ title: title, content: content, image: imageUrl })).then((res) => {
-            console.log(res)
-            if (res) {
+            if (res.type == "post/add/success") {
                 toast({
                     title: 'Post created.',
                     description: "Post has been created successfully",
@@ -60,6 +62,7 @@ const CreateBlog = () => {
                     isClosable: true,
                     position: "top"
                 })
+
             } else {
                 toast({
                     title: 'All fields are required.',
@@ -70,7 +73,12 @@ const CreateBlog = () => {
                     position: "top"
                 })
             }
+            setTitle("")
+            setContent("")
+            setImageUrl("")
         })
+
+
 
 
 
@@ -91,10 +99,10 @@ const CreateBlog = () => {
                     <form onSubmit={handleSubmit} >
                         <FormControl isRequired>
                             <FormLabel>Blog Title</FormLabel>
-                            <Input placeholder='blog title' name="title" onChange={(e) => setTitle(e.target.value)} />
+                            <Input placeholder='blog title' value={title} name="title" onChange={(e) => setTitle(e.target.value)} />
                             <FormLabel mt={5}>Blog Content</FormLabel>
-                            <Textarea minH="200px" mb={5} placeholder='Type your content here' name='content' onChange={(e) => setContent(e.target.value)} />
-                            <input type="file" name="image" onChange={(e) => postDetails(e.target.files[0])} />
+                            <Textarea minH="200px" mb={5} placeholder='Type your content here' value={content} name='content' onChange={(e) => setContent(e.target.value)} />
+                            <input type="file" name="image"  onChange={(e) => postDetails(e.target.files[0])} />
                             <Input mt={5} type="submit" value="Create Blog" color={"white"} bg="tomato" w="full" />
                         </FormControl>
                     </form>

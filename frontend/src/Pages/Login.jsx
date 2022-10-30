@@ -37,10 +37,11 @@ const Login = () => {
         setData({ ...data, [name]: value })
     }
 
-
+    console.log(loginData)
 
     const handleSubmit = (e) => {
         e.preventDefault()
+
         dispatch(UserLogin(data)).then((res) => {
             if (res) {
                 toast({

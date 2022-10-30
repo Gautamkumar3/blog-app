@@ -16,7 +16,7 @@ export const getPostsData = (id) => async (dispatch) => {
         dispatch({ type: GET_POST_SUCCESS, payload: res.data });
         return res;
     } catch (er) {
-        dispatch({ type: GET_POST_ERROR })
+        dispatch({ type: GET_POST_ERROR, payload: er })
     }
 }
 
@@ -29,10 +29,9 @@ export const AddPostData = (data) => async (dispatch) => {
                 authorization: token.token,
             }
         })
-        dispatch({ type: ADD_POST_SUCCESS, payload: res.data });
-
+       return dispatch({ type: ADD_POST_SUCCESS, payload: res.data });
     } catch (er) {
-        dispatch({ type: ADD_POST_ERROR })
+        return dispatch({ type: ADD_POST_ERROR, payload: er })
     }
 }
 
@@ -49,7 +48,7 @@ export const DeletePostData = (id, userId) => async (dispatch) => {
         dispatch({ type: DELETE_POST_SUCCESS, payload: res.data })
         dispatch(getPostsData(userId))
     } catch (er) {
-        dispatch({ type: DELETE_POST_ERROR })
+        dispatch({ type: DELETE_POST_ERROR, payload: er })
     }
 }
 
@@ -66,6 +65,6 @@ export const UpdatePostData = (id, userId, data) => async (dispatch) => {
         dispatch({ type: UPDATE_POST_SUCCESS, payload: res.data })
         dispatch(getPostsData(userId))
     } catch (er) {
-        dispatch({ type: UPDATE_POST_ERROR })
+        dispatch({ type: UPDATE_POST_ERROR, payload: er })
     }
 }

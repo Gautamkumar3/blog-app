@@ -20,7 +20,7 @@ import { FiEdit } from "react-icons/fi";
 const UpdateCommentModal = ({ id, commId }) => {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [comment, setComment] = useState()
+    const [comment, setComment] = useState("")
     const dispatch = useDispatch()
 
     const handleUpdate = (id, commId) => {

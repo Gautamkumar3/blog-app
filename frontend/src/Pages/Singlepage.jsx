@@ -9,6 +9,10 @@ import UpdateCommentModal from '../components/UpdateCommentModal'
 import { FiEdit } from "react-icons/fi";
 import { DeletePostData, getPostsData, UpdatePostData } from '../store/Post/Post.action'
 import UpdatePostModal from '../components/UpdatePostModal'
+import socketIO from 'socket.io-client';
+
+
+var socket;
 
 const Singlepage = () => {
 
@@ -18,18 +22,42 @@ const Singlepage = () => {
     const toast = useToast()
     const navigate = useNavigate()
     const token = JSON.parse(localStorage.getItem("token")) || "";
-    let WriterId;
 
 
 
-    const [formData, setFormdata] = useState()
+
+    const [formData, setFormdata] = useState("")
     const [update, setUpdate] = useState(false)
     const [singleBlog, setSignleBlog] = useState({})
 
+
+    // ################# socket io logic ################
+
     const handleChange = (e) => {
-        setFormdata({ comments: e.target.value })
+        setFormdata(e.target.value)
+
+        socket.emit('typing', "yes done")
+        setUpdate(!update)
     }
 
+
+
+
+    useEffect(() => {
+        socket = socketIO.connect('http://localhost:8080');
+
+        socket.on('comment', (data) => {
+            // console.log(data)
+        })
+
+        socket.on('typing', (data) => {
+            // console.log("User is", data)
+        })
+    }, [update])
+
+
+
+    // ###################################################### 
 
     const getPost = async (id) => {
         let res = await axios.get(`http://localhost:8080/posts/single/${id}`)
@@ -46,8 +74,11 @@ const Singlepage = () => {
 
     const handleComment = (id, formData) => {
         console.log(id, formData)
-        dispatch(addAllComments(id, formData))
+        socket.emit('comment', { ...formData, name: "gautam" })
+        dispatch(addAllComments(id, {comments: formData}))
         setUpdate(!update)
+        setFormdata("")
+
     }
 
     useEffect(() => {
@@ -105,7 +136,9 @@ const Singlepage = () => {
                     </Flex> : null}
             </Box>
             <Flex my={10} borderBottom="1px solid black">
-                <Input border={"none"} placeholder='Add a comment' onChange={handleChange} />
+
+                <Input border={"none"} value={formData} placeholder='Add a comment' onChange={handleChange}  />
+
                 <Button colorScheme={"orange"} onClick={() => handleComment(singleBlog._id, formData)}>Comment</Button>
             </Flex>
             {data?.map((com) => <Flex gap={5} key={com._id} my={3} w="100%" >
