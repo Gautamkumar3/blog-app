@@ -14,9 +14,11 @@ const fs = require('fs');
 // ############## Home page post ###################
 
 app.get("/all", async (req, res) => {
+    const { page = 1, limit = 10 } = req.query
     try {
-        const allPost = await Post.find().populate("userId", "-password");
-        return res.status(200).send(allPost)
+        const allPost=await Post.find().populate("userId", "-password");
+        const filterPost = await Post.find().populate("userId", "-password").skip((page - 1) * limit).limit(limit)
+        return res.status(200).send({filterPost,allPost})
     } catch (er) {
         return res.status(404).send("Something went wrong")
     }
@@ -33,6 +35,23 @@ app.get("/:id", async (req, res) => {
         return res.status(404).send({ msg: er })
     }
 })
+
+// ########################### search post by title ##############
+
+app.get("/search", async (req, res) => {
+
+    let keyword = {}
+    if (req.query.q) {
+        keyword = req.query.q
+    }
+    try {
+        const AllPost = await Post.find({ title: { $regex: keyword }, $option: "i" })
+        return res.status(200).send(AllPost)
+    } catch (er) {
+        return res.status(403).send(er.message)
+    }
+})
+
 
 // ################### Get Post when user click on any particular post ##############
 
