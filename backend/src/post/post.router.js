@@ -11,14 +11,15 @@ const fs = require('fs');
 
 
 
+
 // ############## Home page post ###################
 
 app.get("/all", async (req, res) => {
     const { page = 1, limit = 10 } = req.query
     try {
-        const allPost=await Post.find().populate("userId", "-password");
+        const allPost = await Post.find().populate("userId", "-password");
         const filterPost = await Post.find().populate("userId", "-password").skip((page - 1) * limit).limit(limit)
-        return res.status(200).send({filterPost,allPost})
+        return res.status(200).send({ filterPost, allPost })
     } catch (er) {
         return res.status(404).send("Something went wrong")
     }
@@ -26,26 +27,31 @@ app.get("/all", async (req, res) => {
 
 // ###################  Post related by selected writer ################### 
 
+
+
 app.get("/:id", async (req, res) => {
     const { id } = req.params;
     try {
         let post = await Post.find({ userId: id })
-        res.status(200).send(post)
+       return res.status(200).send(post)
     } catch (er) {
         return res.status(404).send({ msg: er })
     }
 })
 
+
+
 // ########################### search post by title ##############
 
-app.get("/search", async (req, res) => {
-
+app.get("/api/search", async (req, res) => {
     let keyword = {}
     if (req.query.q) {
         keyword = req.query.q
     }
+    console.log(keyword)
     try {
-        const AllPost = await Post.find({ title: { $regex: keyword }, $option: "i" })
+        const AllPost = await Post.find({ "title" : { "$regex": keyword }, "$option": "i" })
+        console.log(AllPost)
         return res.status(200).send(AllPost)
     } catch (er) {
         return res.status(403).send(er.message)
@@ -78,6 +84,8 @@ app.post("/", Authmiddleware, WriterAutMiddleware, async (req, res) => {
     try {
         const post = new Post({ ...req.body, userId: data.id })
         await post.save();
+
+        console.log(post)
         res.status(200).send(post)
     } catch (er) {
         res.status(400).send({ msg: er })

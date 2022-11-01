@@ -11,7 +11,7 @@ const Home = () => {
 
 
     return (
-        <Box pos="relative">
+        <Box pos="relative" mt={"80px"}>
             <Box textAlign="center" position="absolute" top="5%" left="50%" transform="translate(-50%, -50%)">
                 <Heading color="white" size={["xl", "xl", "2xl"]} >Welcome to Gk blog</Heading>
                 <Button mt={5} p="25px 30px" _hover={{ bgGradient: 'linear(to-r, pink.400,#fba062,)', transform: "scale(1.15)" }} bgGradient='linear(to-r, #fba062, pink.400)'

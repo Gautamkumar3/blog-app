@@ -26,6 +26,7 @@ export const getAllComments = (id) => async (dispatch) => {
 
 export const addAllComments = (id, data) => async (dispatch) => {
   dispatch({ type: ADD_COMMENT_LOADING })
+ 
 
   try {
     const res = await axios.post(`http://localhost:8080/comments`, data, {
