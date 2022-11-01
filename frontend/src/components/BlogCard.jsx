@@ -21,7 +21,7 @@ const BlogCard = ({ data }) => {
 
 
     return (
-        <SimpleGrid columns={[1, 2, 3, 3]} gap={10} w={["90%", "80%"]} m="auto" p={5}>
+        <SimpleGrid columns={[1, 2, 2, 3]} gap={10} w={["90%", "80%"]} m="auto" p={5}>
             {data?.map((el, i) => {
                 return <Box key={el._id}>
 

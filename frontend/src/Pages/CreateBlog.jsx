@@ -86,7 +86,7 @@ const CreateBlog = () => {
 
     return (
 
-        <SimpleGrid columns={[1, 2]} spacing={10} w="80%" margin="auto" my={10}>
+        <SimpleGrid  columns={[1, 2]} spacing={10} w="80%" margin="auto" my={10} >
             <Box p={[0, 5]}>
                 <Image h="100%" src="https://media.istockphoto.com/photos/blogging-blog-word-coder-coding-using-laptop-picture-id626669886?s=612x612" />
             </Box>

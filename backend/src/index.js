@@ -6,8 +6,9 @@ require('dotenv').config();
 const PORT = process.env.PORT || 8000;
 const userRouter = require("./user/user.router")
 const postRouter = require("./post/post.router")
-const commentRouter = require("./comment/comment.router")
-
+const commentRouter = require("./comment/comment.router");
+const Post = require("./post/post.schema");
+const User = require("./user/user.schema");
 
 const app = express();
 const server = http.Server(app)
@@ -45,7 +46,20 @@ io.on('connection', (socket) => {
 
 
 app.get("/", (req, res) => {
-    res.send("Welcome to apna blog")
+    res.send("Welcome to GK blog")
+})
+
+app.get("/search", async (req, res) => {
+    let keyword = {}
+    if (req.query.q) {
+        keyword = req.query.q
+    }
+    console.log(keyword)
+    
+    const AllPost = await Post.find({title : {$regex : keyword}, $option : "i"})
+    console.log(AllPost.length)
+    res.send(AllPost)
+
 })
 
 
