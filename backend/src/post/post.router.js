@@ -66,7 +66,7 @@ app.get("/single/:id", async (req, res) => {
     const { id } = req.params;
 
     try {
-        let post = await Post.findById(id)
+        let post = await Post.findById(id).populate("userId", "-password")
         res.status(200).send(post)
     } catch (er) {
         return res.status(404).send({ msg: er })

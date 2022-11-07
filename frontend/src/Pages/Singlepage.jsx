@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Flex, FormLabel, Heading, HStack, Image, Input, Text, Textarea, useToast } from '@chakra-ui/react'
+import { Avatar, Badge, Box, Button, Flex, FormLabel, Heading, HStack, Image, Input, Text, Textarea, useToast } from '@chakra-ui/react'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -75,7 +75,7 @@ const Singlepage = () => {
     const handleComment = (id, formData) => {
         console.log(id, formData)
         socket.emit('comment', { ...formData, name: "gautam" })
-        dispatch(addAllComments(id, {comments: formData}))
+        dispatch(addAllComments(id, { comments: formData }))
         setUpdate(!update)
         setFormdata("")
 
@@ -124,7 +124,14 @@ const Singlepage = () => {
 
     return (
         <Box w={"70%"} m="auto" >
-            <Box mb={"10%"}>
+
+            <Box mt={"10%"}>
+                <Flex align={"center"}>
+                    <Avatar size='sm' src='https://bit.ly/broken-link' />
+                    <Text color="gray.500" borderRadius="20px" p={1}>{singleBlog?.userId?.name}, is author of this blog ✨</Text>
+                    <Badge colorScheme="orange" borderRadius="20px" p={1}>{singleBlog?.created_at?.split("T")[0]}</Badge>
+                </Flex>
+
                 <Heading my={5}>{singleBlog.title}</Heading>
 
                 <Image maxH={"300px"} w="100%" src={singleBlog.image} />
@@ -137,7 +144,7 @@ const Singlepage = () => {
             </Box>
             <Flex my={10} borderBottom="1px solid black">
 
-                <Input border={"none"} value={formData} placeholder='Add a comment' onChange={handleChange}  />
+                <Input border={"none"} value={formData} placeholder='Add a comment' onChange={handleChange} />
 
                 <Button colorScheme={"orange"} onClick={() => handleComment(singleBlog._id, formData)}>Comment</Button>
             </Flex>
