@@ -31,7 +31,7 @@ const Navbar = () => {
             <Flex justifyContent="space-between" fontSize="xl" h={"80px"} align="center" bg="#604d9e" p={5}  color="white" pos={"fixed"} top="0px" w="full" zIndex="5">
                 <NavLink to="/" >GK</NavLink>
                 <Flex gap={5}>
-                    <NavLink to="/signup"  >{token ? token.name : "Signup"}</NavLink>
+                    <NavLink to="/signup"  >{token ? `Welcome, ${ token.name}` : "Signup"}</NavLink>
                     <Button onClick={() => {
                         if (token) {
                             handleLogout();

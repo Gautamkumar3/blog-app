@@ -11,10 +11,9 @@ import AuthorBlog from '../Pages/AuthorBlog'
 const Allroute = () => {
     return (
         <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<AllBlog />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/blog" element={<AllBlog />} />
             <Route path="/create" element={<CreateBlog />} />
             <Route path="/author" element={<AuthorBlog />} />
             <Route path="/author/:id" element={<Singlepage />} />

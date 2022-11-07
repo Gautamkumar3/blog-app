@@ -1,4 +1,4 @@
-import { Box, Flex, FormControl, FormLabel, Image, Input, SimpleGrid, Textarea, useToast } from '@chakra-ui/react'
+import { Box, Button, Flex, FormControl, FormLabel, Heading, Image, Input, SimpleGrid, Textarea, useToast } from '@chakra-ui/react'
 import axios from 'axios'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -78,37 +78,24 @@ const CreateBlog = () => {
             setImageUrl("")
         })
 
-
-
-
-
     }
 
     return (
 
-        <SimpleGrid  columns={[1, 2]} spacing={10} w="80%" margin="auto" my={10} >
-            <Box p={[0, 5]}>
-                <Image h="100%" src="https://media.istockphoto.com/photos/blogging-blog-word-coder-coding-using-laptop-picture-id626669886?s=612x612" />
-            </Box>
-            <Box bg="white" px={5} rounded="md" w="90%" height="fit-content" boxShadow='2xl' p='6' m="auto">
-                <Box mb={-10}>
-                    <Image w={"200px"} margin="auto" src="https://cdn.logojoy.com/wp-content/uploads/2018/05/30164225/572.png" />
-                </Box>
-
-                <Box textAlign={"left"} p="25px 5px" >
-                    <form onSubmit={handleSubmit} >
-                        <FormControl isRequired>
-                            <FormLabel>Blog Title</FormLabel>
-                            <Input placeholder='blog title' value={title} name="title" onChange={(e) => setTitle(e.target.value)} />
-                            <FormLabel mt={5}>Blog Content</FormLabel>
-                            <Textarea minH="200px" mb={5} placeholder='Type your content here' value={content} name='content' onChange={(e) => setContent(e.target.value)} />
-                            <input type="file" name="image"  onChange={(e) => postDetails(e.target.files[0])} />
-                            <Input mt={5} type="submit" value="Create Blog" color={"white"} bg="tomato" w="full" />
-                        </FormControl>
-                    </form>
-                </Box>
-            </Box>
-        </SimpleGrid>
+        <Box mt={"80px"} height={"95vh"} pt={"5%"} background='url(https://images.unsplash.com/photo-1432821596592-e2c18b78144f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80) center/cover no-repeat'>
+            <Flex textAlign={"left"} align="center" justify="center" color={"white"} w="50%" m={"auto"} p={10} backdropFilter='auto' backdropBlur='8px' >
+                <form onSubmit={handleSubmit} >
+                    <FormControl isRequired>
+                        <FormLabel>Blog Title</FormLabel>
+                        <Input bg={"white"} color="blackAlpha.700" border={"2px solid"} placeholder='blog title' value={title} name="title" onChange={(e) => setTitle(e.target.value)} />
+                        <FormLabel mt={5}>Blog Content</FormLabel>
+                        <Textarea color="blackAlpha.700" bg={"white"} border={"2px solid"} minH="200px" mb={5} placeholder='Type your content here' value={content} name='content' onChange={(e) => setContent(e.target.value)} />
+                        <input type="file" name="image" onChange={(e) => postDetails(e.target.files[0])} />
+                        <Button disabled={imageUrl==""} mt={5} _hover={{bg:"#f0153c"}} color={"white"} bg="tomato" w="full">Create Blog</Button>
+                    </FormControl>
+                </form>
+            </Flex>
+        </Box>
 
     )
 }
