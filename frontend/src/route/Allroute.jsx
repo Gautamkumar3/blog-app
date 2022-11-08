@@ -7,6 +7,7 @@ import Signup from '../Pages/Signup'
 import AllBlog from '../Pages/AllBlog'
 import CreateBlog from '../Pages/CreateBlog'
 import AuthorBlog from '../Pages/AuthorBlog'
+import PrivateRoute from '../hoc/PrivateRoute'
 
 const Allroute = () => {
     return (

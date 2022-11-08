@@ -58,7 +58,7 @@ app.post("/login", async (req, res) => {
 
     const refreshToken = jwt.sign({ id: user._id, email: user.email, name: user.name, role: user.role }, refreshKey, { expiresIn: "7 days" })
 
-    res.status(200).send({ msg: "Login successfull", token: token, rtoken: refreshToken, name: user.name, id: user._id })
+    res.status(200).send({ msg: "Login successfull", token: token, rtoken: refreshToken, name: user.name, id: user._id,role: user.role })
 })
 
 

@@ -7,7 +7,7 @@ import { AUTH_LOGIN_ERROR, AUTH_LOGIN_LOADING, AUTH_LOGIN_SUCCESS, AUTH_SIGNUP_E
 export const UserSignup = (data) => async (dispatch) => {
     dispatch({ type: AUTH_SIGNUP_LOADING })
     try {
-        const res = await axios.post("https://blog-app-backend-production.up.railway.app//users/signup", data);
+        const res = await axios.post("http://localhost:8080/users/signup", data);
         dispatch({ type: AUTH_SIGNUP_SUCCESS });
         return res;
     } catch (er) {
