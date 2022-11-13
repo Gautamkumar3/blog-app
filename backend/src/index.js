@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 8000;
 const userRouter = require("./user/user.router")
 const postRouter = require("./post/post.router")
 const commentRouter = require("./comment/comment.router");
-
+const productRouter = require("./products/products.router")
 
 const app = express();
 const server = http.Server(app)
@@ -25,6 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/users", userRouter)
 app.use("/posts", postRouter)
 app.use("/comments", commentRouter)
+
 
 
 io.on('connection', (socket) => {

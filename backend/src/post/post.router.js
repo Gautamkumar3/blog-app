@@ -5,9 +5,8 @@ require('dotenv').config();
 const secretKey = process.env.SECRET_KEY;
 const Authmiddleware = require("../middleware/Authentication");
 const WriterAutMiddleware = require("../middleware/Authorization");
-const multer = require("multer")
 const app = express.Router();
-const fs = require('fs');
+
 
 
 
