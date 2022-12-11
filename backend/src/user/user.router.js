@@ -49,6 +49,7 @@ app.post("/refresh", async (req, res) => {
 })
 
 app.post("/login", async (req, res) => {
+     console.log("res")
     const { email, password } = req.body;
     const user = await UserModel.findOne({ email, password })
     if (!user) {
@@ -58,7 +59,7 @@ app.post("/login", async (req, res) => {
 
     const refreshToken = jwt.sign({ id: user._id, email: user.email, name: user.name, role: user.role }, refreshKey, { expiresIn: "7 days" })
 
-    res.status(200).send({ msg: "Login successfull", token: token, rtoken: refreshToken, name: user.name, id: user._id,role: user.role })
+    return res.status(200).send({ msg: "Login successfull", token: token, rtoken: refreshToken, name: user.name, id: user._id,role: user.role })
 })
 
 

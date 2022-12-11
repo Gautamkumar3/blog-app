@@ -1,55 +1,98 @@
-import { Avatar, Badge, Box, Button, Center, Container, Flex, Grid, GridItem, Heading, Image, SimpleGrid, Text } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom'
-import { writerId } from '../store/auth/Auth.action';
-import { getPostsData } from '../store/Post/Post.action';
-import Pagination from './Pagination';
-
+import {
+  Avatar,
+  Badge,
+  Box,
+  Button,
+  Center,
+  Container,
+  Flex,
+  Grid,
+  GridItem,
+  Heading,
+  Image,
+  SimpleGrid,
+  Text,
+} from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { writerId } from "../store/auth/Auth.action";
+import { getPostsData } from "../store/Post/Post.action";
+import Pagination from "./Pagination";
 
 const BlogCard = ({ data }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const id = useSelector((store) => store.auth.id);
 
+  const getAuthorsdata = (id) => {
+    dispatch(writerId(id));
+  };
 
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const id = useSelector((store) => store.auth.id);
-
-
-    const getAuthorsdata = (id) => {
-        dispatch(writerId(id))
-    }
-
-    return (
-
-        <Container maxW='4xl' my={10}>
-            {data?.map((el, i) => <Flex key={el._id} my={5} >
-                <Box width={"70%"}>
-                    <Flex align={"center"} onClick={(() => { getAuthorsdata(el.userId._id) })}>
-                        <Avatar size='xs' name={el.userId.name} src='https://bit.ly/broken-link' />
-                        <Link to="/author">
-                            <Text color="gray.500" onClick={(() => { getAuthorsdata(el.userId._id) })} colorScheme="orange" borderRadius="20px" p={1}>{el.userId.name} is author of this blog ✨</Text>
-                        </Link>
-                        <Badge colorScheme="orange" borderRadius="20px" p={1}>{el.created_at.split("T")[0]}</Badge>
-                    </Flex>
-
-                    <Text fontSize={"xl"} fontWeight="bold">{el.title}</Text>
-                    <Text color={"blackAlpha.700"} noOfLines={3}>{el.content}</Text>
-                    <Text fontWeight={"bold"} textDecor="underline" color={"blue"} my={1} onClick={() => navigate(`/blog/${el._id}`)} >Read More</Text>
-                </Box>
-                <Center w={"30%"} p={2}>
-                    <Image w="80%" m="auto" maxH={"150px"} src={el.image} />
-                </Center>
+  return (
+    <Container maxW="4xl" my={10}>
+      {data?.map((el, i) => (
+        <Flex key={el._id} my={5}>
+          <Box width={"70%"}>
+            <Flex
+              align={"center"}
+              onClick={() => {
+                getAuthorsdata(el.userId._id);
+              }}
+            >
+              <Avatar
+                size="xs"
+                name={el.userId.name}
+                src="https://bit.ly/broken-link"
+              />
+              <Link to="/author">
+                <Text
+                  color="gray.500"
+                  onClick={() => {
+                    getAuthorsdata(el.userId._id);
+                  }}
+                  colorScheme="orange"
+                  borderRadius="20px"
+                  p={1}
+                >
+                  {el.userId.name} is author of this blog ✨
+                </Text>
+              </Link>
+              <Badge colorScheme="orange" borderRadius="20px" p={1}>
+                {el.created_at.split("T")[0]}
+              </Badge>
             </Flex>
-            )}
-        </Container>
 
-    )
-}
+            <Text fontSize={"xl"} fontWeight="bold">
+              {el.title}
+            </Text>
+            <Text color={"blackAlpha.700"} noOfLines={3}>
+              {el.content}
+            </Text>
+            <Text
+              fontWeight={"bold"}
+              textDecor="underline"
+              color={"blue"}
+              my={1}
+              onClick={() => navigate(`/blog/${el._id}`)}
+              _hover={{ cursor: "pointer" }}
+            >
+              Read More
+            </Text>
+          </Box>
+          <Center w={"30%"} p={2}>
+            <Image w="80%" m="auto" maxH={"150px"} src={el.image} />
+          </Center>
+        </Flex>
+      ))}
+    </Container>
+  );
+};
 
-export default BlogCard
+export default BlogCard;
 
-
-{/* <SimpleGrid columns={[1, 2, 2, 3]} gap={10} w={["90%", "80%"]} m="auto" p={5}>
+{
+  /* <SimpleGrid columns={[1, 2, 2, 3]} gap={10} w={["90%", "80%"]} m="auto" p={5}>
 
 {data?.map((el, i) => {
     return <Box key={el._id}>
@@ -74,4 +117,5 @@ export default BlogCard
     </Box>
 })}
 
-</SimpleGrid > */}
+</SimpleGrid > */
+}
