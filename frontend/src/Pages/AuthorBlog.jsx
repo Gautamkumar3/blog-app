@@ -1,23 +1,29 @@
-import { Badge, Box, Flex, Image, SimpleGrid, Text } from "@chakra-ui/react";
+import { Badge, Box, Flex, Heading, Image, SimpleGrid, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import BlogCard from "../components/BlogCard";
 import { getPostsData } from "../store/Post/Post.action";
 
-
 const AuthorBlog = () => {
-
-  const authorId = useParams()
+  const authorId = useParams();
 
   const data = useSelector((store) => store.posts.data);
   const dispatch = useDispatch();
   // const navigate = useNavigate();
-  console.log(data)
+  console.log(data);
 
   useEffect(() => {
-   dispatch(getPostsData(authorId.author));
- },[])
+    dispatch(getPostsData(authorId.author));
+  }, []);
+
+  if (data.length == 0) {
+    return (
+      <Flex align={"center"} justify="center">
+        <Heading>No Data Found</Heading>
+      </Flex>
+    );
+  }
 
   return (
     <>

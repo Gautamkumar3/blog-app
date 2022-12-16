@@ -31,7 +31,7 @@ app.get("/all", async (req, res) => {
 app.get("/:id", async (req, res) => {
     const { id } = req.params;
     try {
-        let post = await Post.find({ userId: id })
+        let post = await Post.find({ userId: id }).populate("userId","-password")
        return res.status(200).send(post)
     } catch (er) {
         return res.status(404).send({ msg: er })
