@@ -40,6 +40,6 @@ export const UserLogout = () => async (dispatch) => {
   dispatch({ type: LOGOUT_SUCCESS });
 };
 
-export const writerId = (id) => async (dispatch) => {
-  dispatch({ type: getWriterId, payload: id });
-};
+// export const writerId = (id) => async (dispatch) => {
+//   dispatch({ type: getWriterId, payload: id });
+// };

@@ -15,10 +15,12 @@ import { UserLogout } from "../store/auth/Auth.action";
 import logo from "../Images/bglogo.png";
 
 const Navbar = () => {
-  const token = JSON.parse(localStorage.getItem("token"));
+  const token = JSON.parse(localStorage.getItem("token")) || "";
   const dispatch = useDispatch();
   const toast = useToast();
   const navigate = useNavigate();
+
+  console.log(token.role)
 
   const handleLogout = () => {
     dispatch(UserLogout());
@@ -50,7 +52,7 @@ const Navbar = () => {
         zIndex="5"
       >
         <NavLink to="/">
-          <Image src={logo}  h="70px"/>
+          <Image src={logo} h="70px" />
         </NavLink>
         <Flex gap={5}>
           <NavLink to="/signup">
@@ -69,6 +71,8 @@ const Navbar = () => {
           >
             {token ? "Logout" : "Login"}
           </Button>
+          {token.role==="Writer" ? <Button colorScheme={"whatsapp"} onClick={()=>navigate("/create")}>Create Blog</Button> : ""}
+          
           {token ? (
             <Avatar
               size="sm"

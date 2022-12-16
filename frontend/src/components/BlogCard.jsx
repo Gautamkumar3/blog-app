@@ -13,21 +13,21 @@ import {
   SimpleGrid,
   Text,
 } from "@chakra-ui/react";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { writerId } from "../store/auth/Auth.action";
-import { getPostsData } from "../store/Post/Post.action";
-import Pagination from "./Pagination";
+
+
+
 
 const BlogCard = ({ data }) => {
+  console.log(data);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const id = useSelector((store) => store.auth.id);
 
-  const getAuthorsdata = (id) => {
-    dispatch(writerId(id));
-  };
+
 
   return (
     <Container maxW="4xl" my={10}>
@@ -36,28 +36,26 @@ const BlogCard = ({ data }) => {
           <Box width={"70%"}>
             <Flex
               align={"center"}
-              onClick={() => {
-                getAuthorsdata(el.userId._id);
-              }}
+              onClick={() => navigate(`/creator/${el.userId._id}`)}
+              _hover={{ cursor: "pointer" }}
             >
               <Avatar
                 size="xs"
                 name={el.userId.name}
                 src="https://bit.ly/broken-link"
               />
-              <Link to="/author">
+              <Box>
                 <Text
                   color="gray.500"
-                  onClick={() => {
-                    getAuthorsdata(el.userId._id);
-                  }}
+                  onClick={() => navigate(`/creator/${el.userId._id}`)}
+                  _hover={{ cursor: "pointer" }}
                   colorScheme="orange"
                   borderRadius="20px"
                   p={1}
                 >
                   {el.userId.name} is author of this blog ✨
                 </Text>
-              </Link>
+              </Box>
               <Badge colorScheme="orange" borderRadius="20px" p={1}>
                 {el.created_at.split("T")[0]}
               </Badge>

@@ -16,8 +16,8 @@ import {
 
 const token = JSON.parse(localStorage.getItem("token")) || "";
 
-const api = "https://backend-deploy-render.onrender.com";
-// const api = "http://localhost:8080";
+// const api = "https://backend-deploy-render.onrender.com";
+const api = "http://localhost:8080";
 
 export const getPostsData = (id) => async (dispatch) => {
   dispatch({ type: GET_POST_LOADING });

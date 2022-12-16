@@ -8,6 +8,6 @@ export const AUTH_SIGNUP_LOADING = 'auth/signup/loading'
 export const AUTH_SIGNUP_ERROR = 'auth/signup/error'
 
 
-export const getWriterId = "get/writer/id"
+// export const getWriterId = "get/writer/id"
 
 export const LOGOUT_SUCCESS = "auth/logout/success"

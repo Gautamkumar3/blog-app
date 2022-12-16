@@ -9,7 +9,7 @@ import UpdateCommentModal from '../components/UpdateCommentModal'
 import { FiEdit } from "react-icons/fi";
 import { DeletePostData, getPostsData, UpdatePostData } from '../store/Post/Post.action'
 import UpdatePostModal from '../components/UpdatePostModal'
-import socketIO from 'socket.io-client';
+// import socketIO from 'socket.io-client';
 
 
 var socket;
@@ -29,26 +29,24 @@ const Singlepage = () => {
   const [update, setUpdate] = useState(false);
   const [singleBlog, setSignleBlog] = useState({});
 
-  // ################# socket io logic ################
-
   const handleChange = (e) => {
     setFormdata(e.target.value);
-
-    socket.emit("typing", "yes done");
     setUpdate(!update);
   };
 
-  useEffect(() => {
-    socket = socketIO.connect("http://localhost:8080");
+  // ################# socket io logic ################
 
-    socket.on("comment", (data) => {
-      // console.log(data)
-    });
+  // useEffect(() => {
+  //   socket = socketIO.connect("http://localhost:8080");
 
-    socket.on("typing", (data) => {
-      // console.log("User is", data)
-    });
-  }, [update]);
+  //   socket.on("comment", (data) => {
+  //     // console.log(data)
+  //   });
+
+  //   socket.on("typing", (data) => {
+  //     // console.log("User is", data)
+  //   });
+  // }, [update]);
 
   // ######################################################
 
@@ -65,7 +63,7 @@ const Singlepage = () => {
 
   const handleComment = (id, formData) => {
     console.log(id, formData);
-    socket.emit("comment", { ...formData, name: "gautam" });
+    // socket.emit("comment", { ...formData, name: "gautam" });
     dispatch(addAllComments(id, { comments: formData }));
     setUpdate(!update);
     setFormdata("");

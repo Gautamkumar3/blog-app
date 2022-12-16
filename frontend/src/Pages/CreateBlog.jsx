@@ -51,6 +51,7 @@ const CreateBlog = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+ 
         console.log(({ title: title, content: content, image: imageUrl }))
         dispatch(AddPostData({ title: title, content: content, image: imageUrl })).then((res) => {
             if (res.type == "post/add/success") {
@@ -91,7 +92,7 @@ const CreateBlog = () => {
                         <FormLabel mt={5}>Blog Content</FormLabel>
                         <Textarea color="blackAlpha.700" bg={"white"} border={"2px solid"} minH="200px" mb={5} placeholder='Type your content here' value={content} name='content' onChange={(e) => setContent(e.target.value)} />
                         <input type="file" name="image" onChange={(e) => postDetails(e.target.files[0])} />
-                        <Button disabled={imageUrl==""} mt={5} _hover={{bg:"#f0153c"}} color={"white"} bg="tomato" w="full">Create Blog</Button>
+                        <Button disabled={imageUrl==""} mt={5} _hover={{bg:"#f0153c"}} color={"white"} bg="tomato" w="full" type='submit'>Create Blog</Button>
                     </FormControl>
                 </form>
             </Flex>
