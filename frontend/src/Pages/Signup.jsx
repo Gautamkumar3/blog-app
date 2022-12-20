@@ -31,18 +31,29 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(UserSignup(formData));
-    toast({
-      title: "Account created.",
-      description: "We've created your account for you.",
-      status: "success",
-      duration: 5000,
-      isClosable: true,
-      position: "top",
+    dispatch(UserSignup(formData)).then((res) => {
+      if (res.type === "auth/signup/error") {
+        toast({
+          title: "Signup Failed",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+        });
+      } else {
+        toast({
+          title: "Account created.",
+          description: "We've created your account for you.",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+        });
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000);
+      }
     });
-    setTimeout(() => {
-      navigate("/login");
-    }, 2000);
   };
 
   return (
@@ -53,13 +64,24 @@ const Signup = () => {
           <Box textAlign={"left"} p={10}>
             <form onSubmit={handleSubmit}>
               <FormLabel>Name</FormLabel>
-              <Input placeholder="name" name="name" onChange={handleChange} />
+              <Input
+                placeholder="name"
+                name="name"
+                type={"text"}
+                onChange={handleChange}
+              />
               <FormLabel>Email</FormLabel>
-              <Input placeholder="email" name="email" onChange={handleChange} />
+              <Input
+                placeholder="email"
+                name="email"
+                type={"email"}
+                onChange={handleChange}
+              />
               <FormLabel mt={2}>Password</FormLabel>
               <Input
                 placeholder="password"
                 name="password"
+                type={"password"}
                 onChange={handleChange}
               />
               <FormLabel mt={2}>Role</FormLabel>

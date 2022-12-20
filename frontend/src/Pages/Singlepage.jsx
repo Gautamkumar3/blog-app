@@ -22,7 +22,7 @@ const Singlepage = () => {
   const navigate = useNavigate();
   const token = JSON.parse(localStorage.getItem("token")) || "";
 
-  const api = "https://backend-deploy-render.onrender.com";
+  const api = "https://backend-deploy-render-production.up.railway.app";
   // const api = "http://localhost:8080";
 
   const [formData, setFormdata] = useState("");

@@ -34,7 +34,7 @@ const Login = () => {
     e.preventDefault();
 
     dispatch(UserLogin(data)).then((res) => {
-      if (res) {
+      if (res.data.msg === "Login successfull") {
         toast({
           title: "Login Successful",
           description: "Your are redirected to home page",
@@ -80,6 +80,7 @@ const Login = () => {
               <Input
                 placeholder="email"
                 name="email"
+                type={"email"}
                 onChange={handleChange}
                 value={data.email}
               />
@@ -87,6 +88,7 @@ const Login = () => {
               <Input
                 placeholder="password"
                 name="password"
+                type={"password"}
                 onChange={handleChange}
                 value={data.password}
               />
