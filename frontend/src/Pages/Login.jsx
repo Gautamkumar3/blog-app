@@ -34,7 +34,7 @@ const Login = () => {
     e.preventDefault();
 
     dispatch(UserLogin(data)).then((res) => {
-      if (res.data.msg === "Login successfull") {
+      if (res?.data?.msg === "Login successfull") {
         toast({
           title: "Login Successful",
           description: "Your are redirected to home page",
