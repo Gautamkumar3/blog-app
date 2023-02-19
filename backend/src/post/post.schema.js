@@ -13,7 +13,10 @@ const postSchema = new mongoose.Schema(
     category: {
       type: String,
       required: [true, "Please select the category."],
-      enum: ["tech", "lifestyle", "business", "entertainment", "world"],
+      enum: {
+        values: ["tech", "lifestyle", "business", "entertainment", "world"],
+        message: "Please select your blog category.",
+      },
     },
     image: {
       type: String,

@@ -146,7 +146,7 @@ const Singlepage = () => {
 
         <Heading my={5}>{singleBlog.title}</Heading>
 
-        <Image maxH={"300px"} w="100%" src={singleBlog.image} />
+        <Image maxH={"400px"} w="100%" src={singleBlog.image} />
         <Text
           mt={5}
           fontFamily="source-serif-pro, Georgia, Cambria, serif;"

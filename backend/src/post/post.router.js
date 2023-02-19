@@ -45,8 +45,7 @@ app.get("/api/search", async (req, res) => {
   console.log(keyword);
   try {
     const AllPost = await Post.find({
-      title: { $regex: keyword },
-      $option: "i",
+      title: { $regex: keyword, $options: "i" },
     });
     console.log(AllPost);
     return res.status(200).send(AllPost);

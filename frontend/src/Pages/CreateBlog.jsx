@@ -27,12 +27,13 @@ const CreateBlog = () => {
   const dispatch = useDispatch();
   const post = useSelector((store) => store.posts);
 
-  const postDetails = (imageUrl) => {
+    const postDetails = (imageUrl) => {
+      console.log(imageUrl)
     if (imageUrl === undefined) {
       toast({
         title: "Please seclect an Image!",
         description: "wraning",
-        status: "success",
+        status: "warning",
         duration: 5000,
         isClosable: true,
         position: "top",
@@ -62,9 +63,19 @@ const CreateBlog = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log({ title: title, content: content, image: imageUrl });
+    console.log({
+      title: title,
+      content: content,
+      image: imageUrl,
+      category: type,
+    });
     dispatch(
-      AddPostData({ title: title, content: content, image: imageUrl })
+      AddPostData({
+        title: title,
+        content: content,
+        image: imageUrl,
+        category: type,
+      })
     ).then((res) => {
       if (res.type == "post/add/success") {
         toast({
@@ -85,10 +96,10 @@ const CreateBlog = () => {
           position: "top",
         });
       }
-      setTitle("");
-      setType("");
-      setContent("");
-      setImageUrl("");
+      //   setTitle("");
+      //   setType("");
+      //   setContent("");
+      //   setImageUrl("");
     });
   };
 
