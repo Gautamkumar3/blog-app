@@ -1,16 +1,38 @@
-import { Avatar, Badge, Box, Button, Flex, FormLabel, Heading, HStack, Image, Input, Text, Textarea, useToast } from '@chakra-ui/react'
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { createPath, Navigate, useNavigate, useParams } from 'react-router-dom'
-import { addAllComments, deleteComments, getAllComments, updateComments } from '../store/comment/Comment.action'
-import { DeleteIcon } from '@chakra-ui/icons'
-import UpdateCommentModal from '../components/UpdateCommentModal'
+import {
+  Avatar,
+  Badge,
+  Box,
+  Button,
+  Flex,
+  FormLabel,
+  Heading,
+  HStack,
+  Image,
+  Input,
+  Text,
+  Textarea,
+  useToast,
+} from "@chakra-ui/react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { createPath, Navigate, useNavigate, useParams } from "react-router-dom";
+import {
+  addAllComments,
+  deleteComments,
+  getAllComments,
+  updateComments,
+} from "../store/comment/Comment.action";
+import { DeleteIcon } from "@chakra-ui/icons";
+import UpdateCommentModal from "../components/UpdateCommentModal";
 import { FiEdit } from "react-icons/fi";
-import { DeletePostData, getPostsData, UpdatePostData } from '../store/Post/Post.action'
-import UpdatePostModal from '../components/UpdatePostModal'
+import {
+  DeletePostData,
+  getPostsData,
+  UpdatePostData,
+} from "../store/Post/Post.action";
+import UpdatePostModal from "../components/UpdatePostModal";
 // import socketIO from 'socket.io-client';
-
 
 var socket;
 
@@ -22,8 +44,9 @@ const Singlepage = () => {
   const navigate = useNavigate();
   const token = JSON.parse(localStorage.getItem("token")) || "";
 
-  const api = "https://backend-deploy-render-production.up.railway.app";
-  // const api = "http://localhost:8080";
+  // const api = "https://backend-deploy-render-production-2f86.up.railway.app";
+  // const api = "https://backend-deploy-render-production.up.railway.app";
+  const api = "http://localhost:8080";
 
   const [formData, setFormdata] = useState("");
   const [update, setUpdate] = useState(false);
@@ -193,10 +216,6 @@ const Singlepage = () => {
       ))}
     </Box>
   );
-}
+};
 
-export default Singlepage
-
-
-
-
+export default Singlepage;

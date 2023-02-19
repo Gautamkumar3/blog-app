@@ -16,7 +16,8 @@ import {
 
 const token = JSON.parse(localStorage.getItem("token")) || "";
 
-const api = "https://backend-deploy-render-production.up.railway.app";
+const api = "https://backend-deploy-render-production-2f86.up.railway.app";
+// const api = "https://backend-deploy-render-production.up.railway.app";
 // const api = "http://localhost:8080";
 
 export const getPostsData = (id) => async (dispatch) => {

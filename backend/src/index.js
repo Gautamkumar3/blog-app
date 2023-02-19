@@ -25,6 +25,12 @@ app.use("/users", userRouter);
 app.use("/posts", postRouter);
 app.use("/comments", commentRouter);
 
+app.all("*", (req, res) => {
+  return res
+    .status(404)
+    .json({ success: false, message: `${req.originalUrl} route not found` });
+});
+
 io.on("connection", (socket) => {
   console.log(`New connection: ${socket.id}`);
 

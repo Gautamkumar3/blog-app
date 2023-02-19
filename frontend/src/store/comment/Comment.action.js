@@ -16,8 +16,9 @@ import {
 
 const token = JSON.parse(localStorage.getItem("token")) || "";
 
-const api = "https://backend-deploy-render-production.up.railway.app";
-// const api = "http://localhost:8080";
+// const api = "https://backend-deploy-render-production-2f86.up.railway.app";
+// const api = "https://backend-deploy-render-production.up.railway.app";
+const api = "http://localhost:8080";
 
 export const getAllComments = (id) => async (dispatch) => {
   dispatch({ type: GET_COMMENT_LOADING });
@@ -40,6 +41,7 @@ export const addAllComments = (id, data) => async (dispatch) => {
   dispatch({ type: ADD_COMMENT_LOADING });
 
   try {
+    console.log(token.token)
     const res = await axios.post(`${api}/comments`, data, {
       headers: {
         authorization: token.token,

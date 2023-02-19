@@ -10,20 +10,20 @@ import {
   LOGOUT_SUCCESS,
 } from "./Auth.types";
 
-const api = "https://backend-deploy-render-production.up.railway.app";
+const api = "https://backend-deploy-render-production-2f86.up.railway.app";
+// const api = "https://backend-deploy-render-production.up.railway.app";
 // const api = "http://localhost:8080";
 
 export const UserSignup = (data) => async (dispatch) => {
   dispatch({ type: AUTH_SIGNUP_LOADING });
   try {
     const res = await axios.post(`${api}/users/signup`, data);
-    dispatch({ type: AUTH_SIGNUP_SUCCESS,payload:res.data });
+    dispatch({ type: AUTH_SIGNUP_SUCCESS, payload: res.data });
     return res.data;
   } catch (er) {
-    return dispatch({ type: AUTH_SIGNUP_ERROR });
+    return dispatch({ type: AUTH_SIGNUP_ERROR, msg: er.message });
   }
 };
-
 
 export const UserLogin = (data) => async (dispatch) => {
   dispatch({ type: AUTH_LOGIN_LOADING });

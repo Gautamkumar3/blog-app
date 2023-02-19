@@ -20,7 +20,7 @@ const Navbar = () => {
   const toast = useToast();
   const navigate = useNavigate();
 
-  console.log(token.role)
+  console.log(token.role);
 
   const handleLogout = () => {
     dispatch(UserLogout());
@@ -44,7 +44,7 @@ const Navbar = () => {
         h={"80px"}
         align="center"
         bg="#604d9e"
-        p={5}
+        p={[2, 5]}
         color="white"
         pos={"fixed"}
         top="0px"
@@ -54,7 +54,16 @@ const Navbar = () => {
         <NavLink to="/">
           <Image src={logo} h="70px" />
         </NavLink>
-        <Flex gap={5}>
+        <Flex gap={[2, 4]} align="center">
+          {token ? (
+            <Avatar
+              size="sm"
+              name={token.name}
+              src="https://bit.ly/broken-link"
+            />
+          ) : (
+            ""
+          )}
           <NavLink to="/signup">
             {token ? `Welcome, ${token.name}` : "Signup"}
           </NavLink>
@@ -71,14 +80,13 @@ const Navbar = () => {
           >
             {token ? "Logout" : "Login"}
           </Button>
-          {token.role==="Writer" ? <Button colorScheme={"whatsapp"} onClick={()=>navigate("/create")}>Create Blog</Button> : ""}
-          
-          {token ? (
-            <Avatar
-              size="sm"
-              name="user"
-              src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
-            />
+          {token.role === "Writer" ? (
+            <Button
+              colorScheme={"whatsapp"}
+              onClick={() => navigate("/create")}
+            >
+              Create Blog
+            </Button>
           ) : (
             ""
           )}

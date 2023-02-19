@@ -22,8 +22,11 @@ import { SearchIcon } from "@chakra-ui/icons";
 import Loader from "../components/Loader";
 
 const getAllBlog = async (page = 1, limit = 12) => {
+  // let res = await axios.get(
+  //   `https://backend-deploy-render.onrender.com/posts/all?page=${page}&&limit=${limit}`
+  // );
   let res = await axios.get(
-    `https://backend-deploy-render.onrender.com/posts/all?page=${page}&&limit=${limit}`
+    `https://backend-deploy-render-production-2f86.up.railway.app/posts/all?page=${page}&&limit=${limit}`
   );
 
   return res;
@@ -31,7 +34,7 @@ const getAllBlog = async (page = 1, limit = 12) => {
 
 const searchBlogData = async (query) => {
   let res = await axios.get(
-    `https://backend-deploy-render.onrender.com/posts/api/search?q=${query}`
+    `https://backend-deploy-render-production-2f86.up.railway.app/posts/api/search?q=${query}`
   );
   return res;
 };
@@ -82,7 +85,7 @@ const AllBlog = () => {
       </Box>
 
       <Flex mt={5} justify="center">
-        <InputGroup w={"40%"}>
+        <InputGroup w={["80%", "40%"]}>
           <Input
             border={"2px solid red"}
             onChange={(e) => setQuery(e.target.value)}
