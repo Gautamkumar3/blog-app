@@ -20,17 +20,9 @@ import BlogCard from "../components/BlogCard";
 import Pagination from "../components/Pagination";
 import { SearchIcon } from "@chakra-ui/icons";
 import Loader from "../components/Loader";
+import { getAllBlog } from "../API/api";
 
-const getAllBlog = async (page = 1, limit = 12) => {
-  // let res = await axios.get(
-  //   `https://backend-deploy-render.onrender.com/posts/all?page=${page}&&limit=${limit}`
-  // );
-  let res = await axios.get(
-    `https://backend-deploy-render-production-2f86.up.railway.app/posts/all?page=${page}&&limit=${limit}`
-  );
 
-  return res;
-};
 
 const searchBlogData = async (query) => {
   let res = await axios.get(

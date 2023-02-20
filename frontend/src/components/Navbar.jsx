@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { UserLogout } from "../store/auth/Auth.action";
 import logo from "../Images/bglogo.png";
 
@@ -54,6 +54,54 @@ const Navbar = () => {
         <NavLink to="/">
           <Image src={logo} h="70px" />
         </NavLink>
+
+        <Flex gap={8}>
+          <NavLink
+            style={({ isActive }) => ({
+              color: isActive ? "red" : "#fff",
+              borderBottom: isActive ? "3px solid red" : "",
+            })}
+            to={"/tech"}
+          >
+            Tech
+          </NavLink>
+          <NavLink
+            style={({ isActive }) => ({
+              color: isActive ? "red" : "#fff",
+              borderBottom: isActive ? "3px solid red" : "",
+            })}
+            to={"/entertainment"}
+          >
+            Entertainment
+          </NavLink>
+          <NavLink
+            style={({ isActive }) => ({
+              color: isActive ? "red" : "#fff",
+              borderBottom: isActive ? "3px solid red" : "",
+            })}
+            to={"/lifestyle"}
+          >
+            Lifestyle
+          </NavLink>
+          <NavLink
+            style={({ isActive }) => ({
+              color: isActive ? "red" : "#fff",
+              borderBottom: isActive ? "3px solid red" : "",
+            })}
+            to={"/world"}
+          >
+            World
+          </NavLink>
+          <NavLink
+            style={({ isActive }) => ({
+              color: isActive ? "red" : "#fff",
+              borderBottom: isActive ? "3px solid red" : "",
+            })}
+            to={"/business"}
+          >
+            Business
+          </NavLink>
+        </Flex>
         <Flex gap={[2, 4]} align="center">
           {token ? (
             <Avatar
