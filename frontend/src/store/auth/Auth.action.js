@@ -10,7 +10,7 @@ import {
   LOGOUT_SUCCESS,
 } from "./Auth.types";
 
-const api = "https://backend-deploy-render-production-2f86.up.railway.app";
+const api = "https://backend-deploy-render-production-c99e.up.railway.app";
 // const api = "https://backend-deploy-render-production.up.railway.app";
 // const api = "http://localhost:8080";
 
