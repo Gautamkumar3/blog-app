@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { UserLogout } from "../store/auth/Auth.action";
 import logo from "../Images/bglogo.png";
+import Styles from "./navbar.module.css";
 
 const Navbar = () => {
   const token = JSON.parse(localStorage.getItem("token")) || "";
@@ -37,7 +38,7 @@ const Navbar = () => {
   };
 
   return (
-    <>
+    <Box className={Styles.nav}>
       <Flex
         justifyContent="space-between"
         fontSize="xl"
@@ -55,7 +56,7 @@ const Navbar = () => {
           <Image src={logo} h="70px" />
         </NavLink>
 
-        <Flex gap={8}>
+        <Flex gap={[4, 5, 8]}>
           <NavLink
             style={({ isActive }) => ({
               color: isActive ? "red" : "#fff",
@@ -140,7 +141,7 @@ const Navbar = () => {
           )}
         </Flex>
       </Flex>
-    </>
+    </Box>
   );
 };
 

@@ -24,13 +24,11 @@ const BlogCard = ({ data }) => {
   const dispatch = useDispatch();
   const id = useSelector((store) => store.auth.id);
 
-
-
   return (
     <Container maxW="4xl" my={10}>
       {data?.map((el, i) => (
         <Flex key={el._id} my={5}>
-          <Box width={"70%"}>
+          <Box width={["90%", "70%"]}>
             <Flex
               align={"center"}
               onClick={() => navigate(`/creator/${el.userId._id}`)}
@@ -76,7 +74,7 @@ const BlogCard = ({ data }) => {
             </Text>
           </Box>
           <Center w={"30%"} p={2}>
-            <Image w="80%" m="auto" maxH={"150px"} src={el.image} />
+            <Image w="80%" m="auto" h={["130px", "110px"]} src={el.image} />
           </Center>
         </Flex>
       ))}

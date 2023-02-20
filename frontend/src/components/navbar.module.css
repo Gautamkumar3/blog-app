@@ -1,0 +1,16 @@
+.nav {
+  display: block;
+}
+
+.mob_nav {
+  display: block;
+}
+
+@media screen and (max-width: 768px) {
+  .mob_nav {
+    display: block;
+  }
+  .nav {
+    display: none;
+  }
+}
