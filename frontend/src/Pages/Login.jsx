@@ -33,13 +33,12 @@ const Login = ({ title }) => {
   const navigate = useNavigate();
 
   return (
-    <Flex bg="gray.100" justify="center" h="100vh" my={"5%"}>
+    <Flex bg="gray.100" justify="center" h="100vh" my={["10%", "5%"]}>
       <Box
         bg="white"
         px={5}
         rounded="md"
-        w={["90%", "30%"]}
-        mt={"5%"}
+        mt={["10%", "5%"]}
         height="fit-content"
       >
         <Box my={10}>

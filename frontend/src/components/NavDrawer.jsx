@@ -65,7 +65,7 @@ const NavDrawer = () => {
           <DrawerCloseButton />
           <DrawerBody>
             <Box>
-              <Flex justify={"space-around"}>
+              <Flex justify={"space-around"} align="center">
                 <HStack>
                   {token ? (
                     <Avatar
@@ -79,7 +79,13 @@ const NavDrawer = () => {
                   <NavLink to="/signup">
                     <Text fontSize={"30px"} fontWeight="bold">
                       {" "}
-                      {token ? `Welcome, ${token.name}` : "Signup"}
+                      {token ? (
+                        `Welcome, ${token.name}`
+                      ) : (
+                        <Button onClick={() => onClose()} colorScheme="blue">
+                          Signup
+                        </Button>
+                      )}
                     </Text>
                   </NavLink>
                 </HStack>

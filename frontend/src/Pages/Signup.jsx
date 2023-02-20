@@ -149,14 +149,7 @@ const Signup = ({ title }) => {
 
   return (
     <Flex bg="gray.100" justify="center" my={"5%"}>
-      <Box
-        bg="white"
-        px={5}
-        rounded="md"
-        w={["90%", "30%"]}
-        mt={"5%"}
-        height="fit-content"
-      >
+      <Box bg="white" px={5} rounded="md" mt={"5%"} height="fit-content">
         <Box my={10}>
           <Image borderRadius={"10px"} w={"200px"} margin="auto" src={logo} />
         </Box>
