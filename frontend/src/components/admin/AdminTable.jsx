@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Table,
   Thead,
@@ -10,10 +10,18 @@ import {
   TableCaption,
   TableContainer,
 } from "@chakra-ui/react";
+import { getAllUserData } from "../../store/admin/admin.action";
+import { useDispatch, useSelector } from "react-redux";
 
 const AdminTable = () => {
+    const dispatch = useDispatch();
+    
+    const {data} = useSelector((store) => store.admin)
+    console.log(data)
 
- 
+  useEffect(() => {
+    dispatch(getAllUserData());
+  }, []);
 
   return (
     <TableContainer>
