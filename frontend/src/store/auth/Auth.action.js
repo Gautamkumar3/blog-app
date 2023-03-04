@@ -10,8 +10,8 @@ import {
   LOGOUT_SUCCESS,
 } from "./Auth.types";
 
-const api = "https://backend-deploy-render-production-c99e.up.railway.app";
-// const api = "https://backend-deploy-render-production.up.railway.app";
+// const api = "https://backend-deploy-render-production-c99e.up.railway.app";
+const api = "https://blog-app-backend-t5f0.onrender.com";
 // const api = "http://localhost:8080";
 
 export const UserSignup = (data) => async (dispatch) => {
@@ -26,11 +26,15 @@ export const UserSignup = (data) => async (dispatch) => {
 };
 
 export const UserLogin = (data) => async (dispatch) => {
+
   dispatch({ type: AUTH_LOGIN_LOADING });
   try {
     const res = await axios.post(`${api}/users/login`, data);
     dispatch({ type: AUTH_LOGIN_SUCCESS, payload: res.data });
+          console.log(res, "dadsdfasdfs");
+
     return res;
+
   } catch (er) {
     return dispatch({ type: AUTH_LOGIN_ERROR, payload: er });
   }

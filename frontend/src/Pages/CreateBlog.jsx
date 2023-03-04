@@ -96,10 +96,10 @@ const CreateBlog = () => {
           position: "top",
         });
       }
-      //   setTitle("");
-      //   setType("");
-      //   setContent("");
-      //   setImageUrl("");
+        setTitle("");
+        setType("");
+        setContent("");
+        setImageUrl("");
     });
   };
 

@@ -22,11 +22,9 @@ import { SearchIcon } from "@chakra-ui/icons";
 import Loader from "../components/Loader";
 import { getAllBlog } from "../API/api";
 
-
-
 const searchBlogData = async (query) => {
   let res = await axios.get(
-    `https://backend-deploy-render-production-2f86.up.railway.app/posts/api/search?q=${query}`
+    `https://blog-app-backend-t5f0.onrender.com/posts/api/search?q=${query}`
   );
   return res;
 };
@@ -77,7 +75,7 @@ const AllBlog = () => {
       </Box>
 
       <Flex mt={5} justify="center">
-        <InputGroup w={["80%", "40%"]}>
+        <InputGroup w={["80%", "60%", "60%", "40%"]}>
           <Input
             border={"2px solid red"}
             onChange={(e) => setQuery(e.target.value)}

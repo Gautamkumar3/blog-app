@@ -1,4 +1,5 @@
 import "./App.css";
+import AdminTable from "./components/admin/AdminTable";
 import Footer from "./components/Footer";
 import MobileNav from "./components/MobileNav";
 
@@ -8,10 +9,11 @@ import Allroute from "./route/Allroute";
 function App() {
   return (
     <div className="App">
-      <MobileNav/>
+      {/* <MobileNav/>
       <Navbar />
       <Allroute />
-      <Footer />
+      <Footer /> */}
+      <AdminTable />
     </div>
   );
 }

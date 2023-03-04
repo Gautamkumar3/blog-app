@@ -59,7 +59,6 @@ app.post("/refresh", async (req, res) => {
 });
 
 app.post("/login", async (req, res) => {
-  console.log("res");
   const { email, password } = req.body;
   const user = await UserModel.findOne({ email, password });
   if (!user) {
@@ -87,6 +86,13 @@ app.post("/login", async (req, res) => {
   });
 });
 
+app.get("/all_user", async (req, res) => {
+  try {
+    const allUser = await UserModel.find();
+    res.status(200).send({ message: "success", data: allUser });
+  } catch (er) {
+    return res.status(500).send(er.message);
+  }
+});
+
 module.exports = app;
-
-

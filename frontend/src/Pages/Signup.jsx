@@ -149,7 +149,14 @@ const Signup = ({ title }) => {
 
   return (
     <Flex bg="gray.100" justify="center" my={"5%"}>
-      <Box bg="white" px={5} rounded="md" mt={"5%"} height="fit-content">
+      <Box
+        bg="white"
+        px={5}
+        rounded="md"
+        mt={["10%", "8%", "5%"]}
+        w={["80%", "50%", "40%", "30%"]}
+        height="fit-content"
+      >
         <Box my={10}>
           <Image borderRadius={"10px"} w={"200px"} margin="auto" src={logo} />
         </Box>
@@ -332,7 +339,7 @@ const Signup = ({ title }) => {
                     borderRadius="10px"
                     _hover={{ bg: "#640090" }}
                   >
-                    Login{" "}
+                    Signup
                   </Button>
                 </VStack>
               </form>

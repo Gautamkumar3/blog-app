@@ -38,7 +38,8 @@ const Login = ({ title }) => {
         bg="white"
         px={5}
         rounded="md"
-        mt={["10%", "5%"]}
+        mt={["10%", "8%", "5%"]}
+        w={["80%", "50%", "40%", "30%"]}
         height="fit-content"
       >
         <Box my={10}>
@@ -51,6 +52,7 @@ const Login = ({ title }) => {
               password: "",
             }}
             onSubmit={(values) => {
+              console.log(values)
               dispatch(
                 UserLogin({ email: values.email, password: values.password })
               ).then((res) => {
