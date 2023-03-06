@@ -28,7 +28,7 @@ app.use("/comments", commentRouter);
 app.all("*", (req, res) => {
   return res
     .status(404)
-    .json({ success: false, message: `${req.originalUrl} route not found` });
+    .send({ success: false, message: `${req.originalUrl} route not found` });
 });
 
 io.on("connection", (socket) => {
