@@ -13,6 +13,7 @@ import EnterTainment from "../Pages/EnterTainment";
 import Business from "../Pages/Business";
 import World from "../Pages/World";
 import LifeStyle from "../Pages/LifeStyle";
+import Admin from "../Pages/Admin";
 
 const Allroute = () => {
   return (
@@ -26,6 +27,7 @@ const Allroute = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/create" element={<CreateBlog />} />
+      <Route path="/admin" element={<Admin />} />
       <Route path="creator/:author" element={<AuthorBlog />} />
       <Route path="/author/:id" element={<Singlepage />} />
       <Route path="/blog/:id" element={<Singlepage />} />
