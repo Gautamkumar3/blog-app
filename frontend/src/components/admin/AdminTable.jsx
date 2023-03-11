@@ -33,7 +33,7 @@ const AdminTable = () => {
     <Box w="50vw">
       <TableContainer overflowX={"hidden"} overflowY="scroll" height={"70vh"}>
         <Table variant="striped">
-          <Thead h={"70px"} bg="#604d9e" color="#fff" pos="sticky" top="0" zIndex={"999"}>
+          <Thead h={"70px"} bg="gray.500" color="#fff" pos="sticky" top="0" zIndex={"999"}>
             <Tr>
               <Th></Th>
               <Th color="#fff">User Name</Th>
